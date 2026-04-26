@@ -148,7 +148,7 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 <!-- HEADER -->
 <div class="hdr">
   <h1>Media Maratón <span class="ac">Sub 1:40</span></h1>
-  <div class="sub">14 abril → 10 octubre 2026 · 26 semanas</div>
+  <div class="sub">27 abril → 10 octubre 2026 · 24 semanas</div>
 </div>
 
 <!-- VIEWS -->
@@ -167,22 +167,26 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 
 <script>
 // ═══════════ DATA ═══════════
-const START=new Date(2026,3,14);
+// Plan adaptado a marcas reales: 5K 24:05 · 10K 51:32 · HM 1:57:58 (VDOT ~42)
+// Principiante absoluto en fuerza → 2 sem de aprendizaje técnico
+const START=new Date(2026,3,27); // lunes 27 abril 2026
 const MES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const DN=["L","M","X","J","V","S","D"];
 const DNF=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
-const KM=[25,30,28,33,36,34,22,28,33,37,40,43,45,38,45,48,50,52,43,50,55,58,55,48,38,25];
-const DL=new Set([3,7,14,19]);
+// 24 semanas. KM totales por semana
+const KM=[24,27,31,28,23,22,28,30,34,28,38,27,40,41,33,40,32,42,44,45,33,36,26,34];
+// Semanas marcadas como descarga/taper
+const DL=new Set([5,10,15,23,24]);
 
 const PH=[
-  {w:[1,2,3],n:"Reacond.",c:"#4A90A4"},
-  {w:[4,5,6],n:"Pre-10K",c:"#E8A838"},
-  {w:[7],n:"Taper+10K",c:"#E06050"},
-  {w:[8,9,10],n:"Rec+Base",c:"#6B9E78"},
-  {w:[11,12,13,14],n:"Base Aer.",c:"#5B8DBE"},
-  {w:[15,16,17,18,19],n:"Desarrollo",c:"#9B6EB7"},
-  {w:[20,21,22,23,24],n:"Específica",c:"#D4785C"},
-  {w:[25,26],n:"Taper HM",c:"#C94040"}
+  {w:[1,2,3,4],n:"Pre-10K",c:"#4A90A4"},
+  {w:[5],n:"Taper+10K",c:"#E06050"},
+  {w:[6],n:"Recuperación",c:"#6B9E78"},
+  {w:[7,8,9,10],n:"Base Aer.",c:"#5B8DBE"},
+  {w:[11,12,13,14,15],n:"Desarrollo",c:"#9B6EB7"},
+  {w:[16,17,18,19,20],n:"Específica HM",c:"#D4785C"},
+  {w:[21,22],n:"Pre-HM",c:"#E8A838"},
+  {w:[23,24],n:"Taper HM",c:"#C94040"}
 ];
 const gp=w=>PH.find(p=>p.w.includes(w));
 
@@ -198,54 +202,119 @@ const TC={
   hm:{bg:"#2a1a10",bd:"#3d2618",ac:"#e08040",lb:"Específico HM"}
 };
 
+// Fuerza A = tren inferior · Fuerza B = tren superior
 const STR={
   A:{
-    adapt:{ph:"Adaptación (S1-10)",ex:[["Sentadilla goblet","3×12","Mancuerna, control total"],["Zancada andando","3×10/pierna","Sin peso o mancuerna ligera"],["Peso muerto rumano 1 pierna","3×10/pierna","Mancuerna ligera"],["Elevación talones","3×15","Escalón, recorrido completo"],["Plancha frontal","3×40s",""],["Plancha lateral","2×30s/lado",""],["Dead bug","3×10/lado","Control lumbar"]]},
-    strength:{ph:"Fuerza (S11-19)",ex:[["Sentadilla búlgara","3×8/pierna","Con mancuernas o barra"],["Step-up cajón alto","3×8/pierna","Con peso"],["Peso muerto rumano 1 pierna","3×8/pierna","Más peso"],["Hip thrust","3×10","Barra o mancuerna pesada"],["Elevación talones +peso","3×12","Añadir carga"],["Plancha frontal","3×50s","O con movimiento"],["Pallof press","3×10/lado","Anti-rotación"],["Mountain climbers","3×15/lado","Core dinámico"]]},
-    maintain:{ph:"Mantenimiento (S20-26)",ex:[["Sentadilla búlgara","2×8/pierna","Mismo peso, menos vol."],["Step-up","2×8/pierna","Mantener carga"],["Peso muerto rumano 1p","2×8/pierna","Mantener"],["Elevación talones","2×12",""],["Plancha frontal","2×45s",""],["Pallof press","2×10/lado",""]]}
+    adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
+      ["Goblet squat","3×10","Mancuerna al pecho, control"],
+      ["Prensa de piernas","3×12","Carga moderada"],
+      ["RDL con mancuernas","3×10","Bisagra de cadera estricta"],
+      ["Hip thrust solo barra","3×12","Sin discos, técnica"],
+      ["Zancada estática","3×8/pierna","Sin peso o ligera"],
+      ["Plancha frontal","3×30s","Core anti-extensión"]
+    ]},
+    strength:{ph:"Carga progresiva (S3-19)",ex:[
+      ["Sentadilla trasera con barra","4×6-8","RPE 7-8 · descanso 2'30\""],
+      ["Peso muerto rumano con barra","3×8-10","Técnica antes que peso · 2'"],
+      ["Hip thrust con barra","3×10-12","Glúteo · 90\""],
+      ["Prensa de piernas","3×12","Volumen complementario · 90\""],
+      ["Zancada caminando","2×10/pierna","Mancuernas · 90\""],
+      ["Elevación de gemelos","3×15","Salud aquiles · 60\""]
+    ]},
+    maintain:{ph:"Mantenimiento (S20-24)",ex:[
+      ["Sentadilla trasera","3×6-8","Mismo peso, menos volumen"],
+      ["Peso muerto rumano","2×8","Mantener fuerza"],
+      ["Hip thrust","2×10","Mantener"],
+      ["Zancada caminando","2×8/pierna","Mantener"],
+      ["Elevación de gemelos","2×15","Salud aquiles"]
+    ]}
   },
   B:{
-    adapt:{ph:"Activación (S1-10)",ex:[["Clamshell con banda","3×15/lado","Glúteo medio"],["Puente glúteo 1 pierna","3×12/pierna","Control pélvico"],["Monster walk (banda)","3×10 pasos/lado","Activación lateral"],["Plancha lateral + elev.","2×10/lado","Estabilidad"],["Flexiones","3×10-15","Tren superior"],["Superman alterno","3×10/lado","Espalda baja"],["Movilidad tobillo+cadera","10 min","Rutina movilidad"]]},
-    strength:{ph:"Estab. bajo carga (S11-19)",ex:[["Clamshell (más resist.)","3×12/lado","Progresar banda"],["Puente glúteo 1p +peso","3×10/pierna","Mancuerna en cadera"],["Monster walk","3×12 pasos/lado","Banda más fuerte"],["Copenhagen plank","3×20s/lado","Aductores"],["Flexiones","3×15",""],["Remo con mancuerna","3×10/lado","Postura, espalda"],["Movilidad","10 min",""]]},
-    maintain:{ph:"Reducción (S20-26)",ex:[["Clamshell","2×12/lado",""],["Puente glúteo 1 pierna","2×10/pierna",""],["Copenhagen plank","2×20s/lado",""],["Flexiones","2×12",""],["Movilidad","10 min",""]]}
+    adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
+      ["Press banca con mancuernas","3×10","Aprendizaje patrón empuje"],
+      ["Jalón al pecho","3×10","Tracción vertical"],
+      ["Remo máquina pecho apoyado","3×10","Tracción horizontal"],
+      ["Press militar mancuernas sentado","3×10","Controlado"],
+      ["Curl + extensión tríceps","2×12 superset","Brazos · 60\""],
+      ["Face pulls polea","3×15","Salud de hombro · 45\""]
+    ]},
+    strength:{ph:"Carga progresiva (S3-19)",ex:[
+      ["Press banca con barra","4×6-8","Compuesto principal · 2'30\""],
+      ["Jalón al pecho","4×8-10","Hasta hacer 6+ dominadas · 2'"],
+      ["Press militar mancuernas (de pie)","3×8-10","Core implicado · 2'"],
+      ["Remo con barra o máquina","3×10","Compensa press · 90\""],
+      ["Curl + tríceps superset","3×10-12","Accesorio · 60\""],
+      ["Face pulls","3×15","Salud hombro · 45\""]
+    ]},
+    maintain:{ph:"Mantenimiento (S20-24)",ex:[
+      ["Press banca","3×6-8","Mismo peso, menos volumen"],
+      ["Jalón al pecho","2×8-10","Mantener"],
+      ["Press militar","2×8","Mantener"],
+      ["Remo","2×10","Mantener"],
+      ["Face pulls","2×15","Mantener salud hombro"]
+    ]}
   }
 };
 
 function gstr(title,week){
   const a=title.includes("Fuerza A"),b=title.includes("Fuerza B");
   if(!a&&!b)return null;
-  const t=a?"A":"B",p=week<=10?"adapt":week<=19?"strength":"maintain";
+  const t=a?"A":"B",p=week<=2?"adapt":week<=19?"strength":"maintain";
   const r=STR[t][p];
   return{...r,tp:`Fuerza ${t}`,light:/ligera|muy ligera|suave|reducid/i.test(title)};
 }
 
+// Orden de la matriz: [Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo]
+// Lun: Fuerza A · Mar: Calidad · Mié: Fuerza B · Jue: Rodaje · Vie: Descanso · Sáb: Larga · Dom: Descanso
 const WK=[
-[["easy","Rodaje suave","6km · 6:00-6:20/km",6],["strength","Rodaje 5km + Fuerza A","5km + fuerza pierna/core",5],["rest","Descanso","",0],["strength","Fuerza B","Estabilidad, glúteo medio, movilidad",0],["easy","Rodaje suave","6km · 6:00-6:20/km",6],["long","Tirada larga","8km · 6:10-6:30/km",8],["rest","Descanso","",0]],
-[["easy","Rodaje suave","7km · 5:55-6:15/km",7],["strength","Rodaje 5km + Fuerza A","5km + fuerza",5],["easy","Rodaje suave","6km · 6:00-6:20/km",6],["strength","Fuerza B","Estabilidad + complemento",0],["easy","Rodaje + 4×100m","6km · Z2 + rectas",6],["long","Tirada larga","10km · 6:00-6:20/km",10],["rest","Descanso","",0]],
-[["easy","Rodaje suave","6km · 5:55-6:15/km",6],["strength","Rodaje 5km + Fuerza A","5km + fuerza",5],["rest","Descanso","",0],["strength","Fuerza B","Estabilidad",0],["easy","Rodaje + rectas","5km · Z2 + 4×100m",5],["long","Tirada larga","9km · 6:00-6:15/km",9],["rest","Descanso","",0]],
-[["intervals","6×800m","9km · 4:45-4:55/km · rec 2:30",9],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 3km","8km total · 5:00-5:10/km",8],["long","Tirada larga","12km · 5:55-6:15/km",12],["rest","Descanso","",0]],
-[["intervals","5×1000m","10km · 4:40-4:50/km · rec 2:30",10],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["strength","Fuerza B ligera","Fuerza reducida",0],["tempo","Tempo 4km","9km · 5:00-5:10/km",9],["long","Tirada progresiva","13km · 10 fácil + 3 a 5:10",13],["rest","Descanso","",0]],
-[["intervals","4×1200m","10km · 4:40-4:50/km · rec 3:00",10],["strength","Rodaje 6km + Fuerza A ligera","6km + fuerza suave",6],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["rest","Descanso","Pre-taper",0],["easy","Rodaje + rectas","5km + 4×100m",5],["long","Tirada moderada","10km · 5:50-6:10/km",10],["rest","Descanso","",0]],
-[["easy","Rodaje + 3×200m","5km · Z1 + rectas",5],["easy","Rodaje muy suave","4km · 6:20-6:40/km",4],["rest","Descanso","",0],["easy","Trote + 3×100m","3km · muy suave",3],["rest","Descanso pre-carrera","",0],["race","🏁 CARRERA 10K","Obj: 48:30-49:30 · Salir a 4:55",10],["rest","Descanso","Recuperación",0]],
-[["easy","Rodaje suave","5km · 6:10-6:30/km",5],["strength","Rodaje 5km + Fuerza A","5km + fuerza",5],["rest","Descanso","",0],["strength","Fuerza B","Estabilidad",0],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["long","Tirada larga","9km · 6:00-6:20/km",9],["rest","Descanso","",0]],
-[["tempo","Fartlek 6×2min","8km · alegre 5:10-5:20",8],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["strength","Fuerza B","Estabilidad",0],["easy","Rodaje","6km · 5:55-6:10/km",6],["long","Tirada larga","11km · 5:55-6:15/km",11],["rest","Descanso","",0]],
-[["tempo","Tempo 3km","8km · 5:00-5:10/km",8],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","6km · 6:00-6:15/km",6],["strength","Fuerza B","Estabilidad",0],["easy","Rodaje + 6×100m","6km · Z2 + rectas",6],["long","Tirada larga","13km · 5:55-6:10/km",13],["rest","Descanso","",0]],
-[["intervals","6×1000m","10km · 4:40-4:50/km · rec 2:30",10],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","7km · 5:55-6:15/km",7],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 4km","9km · 4:55-5:05/km",9],["long","Tirada larga","14km · 5:50-6:10/km",14],["rest","Descanso","",0]],
-[["easy","Rodaje + rectas","6km · Z2 + 4×100m",6],["strength","Rodaje 5km + Fuerza A ligera","5km + fuerza suave",5],["rest","Descanso","Pre-test",0],["rest","Descanso","Pre-test",0],["test","⭐ TEST 5K","Obj: 22:45-23:15 · máx esfuerzo",5],["easy","Rodaje suave","7km · 6:00-6:20/km",7],["long","Tirada larga","15km · 5:50-6:10/km",15]],
-[["intervals","4×1600m","11km · 4:35-4:45/km · rec 3:00",11],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","7km · 5:55-6:15/km",7],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 5km","10km · 4:55-5:05/km",10],["long","Tirada larga","16km · 5:50-6:05/km",16],["rest","Descanso","",0]],
-[["tempo","Fartlek 8×2min","8km · alegre 5:00/km",8],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["rest","Descanso","Extra",0],["strength","Fuerza B ligera","Fuerza suave",0],["easy","Rodaje suave","6km · 5:55-6:10/km",6],["long","Tirada larga","12km · 5:50-6:10/km",12],["rest","Descanso","",0]],
-[["intervals","5×1200m","11km · 4:30-4:40/km · rec 2:30",11],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","7km · 5:50-6:10/km",7],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 5km","10km · 4:50-5:00/km",10],["long","Tirada larga","16km · 5:40-6:00/km",16],["rest","Descanso","",0]],
-[["intervals","3×2000m","11km · 4:35-4:45/km · rec 3:00",11],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","7km · 5:50-6:10/km",7],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 6km","11km · 4:48-4:55/km",11],["long","Tirada larga","18km · 5:40-6:00/km",18],["rest","Descanso","",0]],
-[["easy","Rodaje + 4×200m","6km · Z2 + rectas",6],["strength","Rodaje 5km + Fuerza A ligera","5km + fuerza suave",5],["rest","Descanso","Pre-test",0],["rest","Descanso","Pre-test",0],["test","⭐ TEST 10K","Obj: 46:00-47:30 · máx esfuerzo",10],["easy","Rodaje suave","6km · 6:00-6:20/km",6],["long","Tirada larga","17km · 5:40-6:00/km",17]],
-[["intervals","6×1000m","11km · 4:25-4:35/km · rec 2:00",11],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","8km · 5:45-6:05/km",8],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 7km","12km · 4:45-4:55/km",12],["long","Tirada progresiva","19km · 14 fácil + 5 a 5:10",19],["rest","Descanso","",0]],
-[["tempo","Fartlek 6×3min","9km · alegre 4:45-4:55",9],["strength","Rodaje 6km + Fuerza A","6km + fuerza",6],["easy","Rodaje suave","6km · 5:50-6:10/km",6],["strength","Fuerza B ligera","Fuerza suave",0],["easy","Rodaje suave","6km · 5:45-6:05/km",6],["long","Tirada larga","14km · 5:45-6:05/km",14],["rest","Descanso","",0]],
-[["hm","HM: 3×3km","13km · 4:44/km · rec 2:00",13],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","7km · 5:45-6:05/km",7],["strength","Fuerza B","Estabilidad",0],["intervals","4×1200m","10km · 4:25-4:35/km · rec 2:30",10],["long","Tirada + HM","18km · 12 fácil + 6 a 4:44",18],["rest","Descanso","",0]],
-[["hm","HM: 2×5km","14km · 4:44/km · rec 3:00",14],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","8km · 5:40-6:00/km",8],["strength","Fuerza B","Estabilidad",0],["tempo","Tempo 7km","12km · 4:45-4:50/km",12],["long","Tirada larga","20km · 5:30-5:50/km",20],["rest","Descanso","",0]],
-[["test","⭐ 10K a ritmo HM","13km · 4:44/km · Obj: 47:20",13],["strength","Rodaje 7km + Fuerza A","7km + fuerza",7],["easy","Rodaje suave","8km · 5:40-6:00/km",8],["strength","Fuerza B","Estabilidad",0],["easy","Rodaje medio","8km · 5:20-5:40/km",8],["long","Tirada progresiva","21km · 15 fácil + 6 a 4:50",21],["rest","Descanso","",0]],
-[["hm","HM: 3×4km","15km · 4:44/km · rec 2:00",15],["strength","Rodaje 7km + Fuerza A ligera","7km + fuerza suave",7],["easy","Rodaje suave","7km · 5:45-6:00/km",7],["strength","Fuerza B ligera","Fuerza suave",0],["intervals","8×400m","8km · 4:10-4:20/km · rec 1:30",8],["long","Tirada larga","18km · 5:35-5:50/km",18],["rest","Descanso","",0]],
-[["hm","HM: 2×4km","12km · 4:44/km · rec 2:00",12],["strength","Rodaje 6km + Fuerza A ligera","6km + fuerza suave",6],["easy","Rodaje suave","6km · 5:45-6:05/km",6],["strength","Fuerza B muy ligera","Última fuerza del plan",0],["easy","Rodaje + 4×200m","6km · Z2 + rectas",6],["long","Tirada moderada","14km · 5:35-5:50/km",14],["rest","Descanso","",0]],
-[["hm","HM: 3×2km","10km · 4:44/km · rec 2:00",10],["easy","Rodaje suave","6km · 5:40-6:00/km",6],["easy","Rodaje + rectas","5km · Z2 + 4×100m",5],["rest","Descanso","",0],["easy","Rodaje suave","7km · 5:40-5:55/km",7],["long","Tirada media","10km · 5:35-5:50/km",10],["rest","Descanso","",0]],
-[["easy","Rodaje + 3×200m","5km · Z1 + rectas HM",5],["easy","Rodaje muy suave","4km · 6:00-6:20/km",4],["easy","Trote + 3×100m","3km · muy suave",3],["rest","Descanso total","Preparar material",0],["race","🏁 MEDIA MARATÓN","SUB 1:40 · Salir 4:48 → 4:44",21],["rest","¡Celebrar!","",0],["rest","Descanso","",0]]
+// S1 (27 abr-3 may) Pre-10K · empezamos con fuerza fase 0
+[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","6×400m","8km · 1:50-1:55 · rec 2'00",8],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:50/km",6],["rest","Descanso · movilidad","20-30' + foam roller",0],["long","Tirada larga","10km · 5:35-5:50/km",10],["rest","Descanso","",0]],
+// S2 (4-10 may)
+[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","5×800m","9km · 4:25-4:35/km · rec 2'30",9],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:45/km",6],["rest","Descanso · movilidad","",0],["long","Tirada larga","12km · 5:35-5:50/km",12],["rest","Descanso","",0]],
+// S3 (11-17 may) · empieza fase 1 fuerza
+[["strength","Fuerza A","Sentadilla, RDL, hip thrust con barra",0],["intervals","4×1000m","10km · 4:25-4:35/km · rec 2'30",10],["strength","Fuerza B","Press banca, jalón, militar",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
+// S4 (18-24 may)
+[["strength","Fuerza A","Tren inferior",0],["tempo","3×2000m","10km · 4:50-5:00/km · rec 3'",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","12km · 5:30-5:45/km",12],["rest","Descanso","",0]],
+// S5 (25-31 may) · TAPER + 10K (domingo 31/5)
+[["strength","Fuerza A muy ligera","Solo mantenimiento",0],["intervals","4×400m","5km · 1:50-1:55 · rec 1'30",5],["rest","Descanso","",0],["easy","Rodaje muy suave","5km · 5:40-5:55/km",5],["rest","Descanso pre-carrera","",0],["easy","Trote + 3×100m","3km · activación",3],["race","🏁 CARRERA 10K","Obj: 49:30-50:00 · Salir 4:57-5:00/km",10]],
+// S6 (1-7 jun) · recuperación post-10K
+[["rest","Descanso","Post-10K",0],["easy","Rodaje muy suave","6km · 6:00-6:15/km",6],["strength","Fuerza B","Solo tren superior, sin máximos",0],["easy","Rodaje suave","7km · 5:45-5:55/km",7],["rest","Descanso","",0],["long","Tirada suave","9km · 5:45-5:55/km",9],["rest","Descanso","",0]],
+// S7 (8-14 jun) · base aeróbica 1
+[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×2'","8km · 4:55-5:05 · rec 1'30 trote",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","13km · 5:35-5:50/km",13],["rest","Descanso","",0]],
+// S8 (15-21 jun)
+[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 3km","9km · 4:55-5:05/km",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
+// S9 (22-28 jun)
+[["strength","Fuerza A","Tren inferior",0],["intervals","6×800m","10km · 4:25-4:35/km · rec 2'00",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:30-5:45/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["rest","Descanso","",0]],
+// S10 (29 jun-5 jul) · descarga
+[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 4km","9km · 4:55-5:00/km",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","13km · 5:30-5:45/km",13],["rest","Descanso","",0]],
+// S11 (6-12 jul) · desarrollo 1
+[["strength","Fuerza A","Tren inferior",0],["intervals","6×1000m","11km · 4:25-4:35 · rec 2'00",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["easy","Rodaje suave","3km · 5:50-6:00/km",3]],
+// S12 (13-19 jul) · TEST 5K sábado 18/7
+[["strength","Fuerza A","Tren inferior",0],["easy","Rodaje + 5×100m","8km · Z2 + rectas",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 5K","8km total · Obj 23:00-23:30 · máx esfuerzo",8],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
+// S13 (20-26 jul)
+[["strength","Fuerza A","Tren inferior",0],["intervals","5×1000m","11km · 4:20-4:30/km · rec 2'00",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","17km · 5:25-5:40/km",17],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+// S14 (27 jul-2 ago)
+[["strength","Fuerza A","Tren inferior",0],["intervals","4×1200m","11km · 4:20-4:30/km · rec 2'30",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:25-5:40/km",18],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+// S15 (3-9 ago) · descarga pre-específica
+[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×3'","10km · 4:40-4:50 · rec 1'30",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:25-5:40/km",6],["rest","Descanso","",0],["long","Tirada larga","14km · 5:25-5:40/km",14],["easy","Rodaje suave","3km · 5:50-6:05/km",3]],
+// S16 (10-16 ago) · específica HM 1
+[["strength","Fuerza A ligera","Reducir 25% volumen",0],["intervals","5×1200m","12km · 4:15-4:25/km · rec 2'30",12],["strength","Fuerza B ligera","Reducir 25% volumen",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["hm","Tirada con HM","16km · 11 fácil + 5 a 4:50/km",16],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+// S17 (17-23 ago) · TEST 10K sábado 22/8
+[["strength","Fuerza A ligera","Reducir volumen",0],["easy","Rodaje + 4×200m","8km · Z2 + rectas",8],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 10K","13km total · Obj 47:30-48:30 · máx esfuerzo",13],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
+// S18 (24-30 ago) · específica 3
+[["strength","Fuerza A ligera","Reducir volumen",0],["hm","HM: 3×3km","12km · 4:44/km · rec 2'00",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:20-5:35/km",18],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+// S19 (31 ago-6 sep)
+[["strength","Fuerza A ligera","Reducir volumen",0],["intervals","4×1600m","12km · 4:20-4:30/km · rec 2'30",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","20km · 5:20-5:35/km",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+// S20 (7-13 sep) · empieza mantenimiento fuerza
+[["strength","Fuerza A","Mantenimiento (volumen reducido)",0],["hm","HM: 2×5km","13km · 4:44/km · rec 3'00",13],["strength","Fuerza B","Mantenimiento",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada con HM","20km · 14 fácil + 6 a 4:50/km",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+// S21 (14-20 sep) · 10K a ritmo HM sábado 19/9
+[["strength","Fuerza A ligera","Mantenimiento",0],["tempo","Tempo 4km","9km · 4:50-4:55/km",9],["strength","Fuerza B ligera","Mantenimiento",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ 10K a ritmo HM","13km · 4:44/km · controlado · Obj 47:24",13],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+// S22 (21-27 sep) · pre-HM 2
+[["strength","Fuerza A ligera","Última con cargas piernas",0],["intervals","4×1km","10km · 4:20-4:30/km · rec 2'00",10],["strength","Fuerza B ligera","Última de superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso","",0],["hm","Tirada con HM","15km · 10 fácil + 5 a 4:50/km",15],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+// S23 (28 sep-4 oct) · TAPER HM 1
+[["rest","Descanso o movilidad","Sin fuerza pesada",0],["intervals","5×800m","9km · 4:25/km · rec 2'00",9],["rest","Descanso","",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada media","11km · 5:30-5:45/km",11],["rest","Descanso","",0]],
+// S24 (5-11 oct) · TAPER + HM sábado 10/10
+[["easy","Rodaje suave","4km · 5:35-5:50/km",4],["intervals","3×800m","6km · 4:25/km · rec 2'00",6],["rest","Descanso","",0],["easy","Trote + 4×100m","3km · activación",3],["rest","Descanso","Preparar material",0],["race","🏁 MEDIA MARATÓN","SUB 1:40 · Salir 4:48 → 4:44/km",21],["rest","¡Celebrar!","Recuperación",0]]
 ];
 
 // ═══════════ HELPERS ═══════════
@@ -253,7 +322,7 @@ function dt(w,d){const r=new Date(START);r.setDate(r.getDate()+(w-1)*7+d);return
 function fmtD(d){return d.getDate()+" "+MES[d.getMonth()].slice(0,3).toLowerCase();}
 function dayMap(){
   const m={};
-  for(let w=0;w<26;w++)for(let d=0;d<7;d++){
+  for(let w=0;w<24;w++)for(let d=0;d<7;d++){
     const date=dt(w+1,d);
     const k=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
     const[type,title,detail,km]=WK[w][d];
@@ -324,9 +393,9 @@ function renderWeeks(){
   let h="";
   // Find current week
   const diff=Math.floor((today-START)/(7*864e5));
-  const curW=Math.max(1,Math.min(26,diff+1));
+  const curW=Math.max(1,Math.min(24,diff+1));
 
-  for(let wi=0;wi<26;wi++){
+  for(let wi=0;wi<24;wi++){
     const w=wi+1,ph=gp(w),d0=dt(w,0),d6=dt(w,6);
     const isOpen=openWeek===w;
     h+=`<div class="wcard" id="wk${w}">`;
@@ -363,47 +432,75 @@ function renderWeeks(){
   v.querySelectorAll(".wday").forEach(el=>el.addEventListener("click",e=>{e.stopPropagation();showDetail(el.dataset.key);}));
 
   // Auto-open current week on first render
-  if(openWeek===null&&curW>=1&&curW<=26){openWeek=curW;renderWeeks();}
+  if(openWeek===null&&curW>=1&&curW<=24){openWeek=curW;renderWeeks();}
 }
 
 // ═══════════ RENDER ZONES ═══════════
 function renderInfo(){
   const v=document.getElementById("v-info");
-  let h=`<div class="section-title">Zonas de ritmo — Fase inicial (S1-10)</div>`;
+  let h=`<div class="section-title">Marcas actuales · base del plan</div>`;
   h+=`<div class="zcard">${[
-    ["Z1 Recuperación","6:30-7:00","Post-calidad","#555"],
-    ["Z2 Rodaje fácil","5:50-6:20","Base aeróbica","var(--green)"],
-    ["Z3 Umbral/Tempo","5:00-5:10","Bloques tempo","var(--yellow)"],
-    ["Z4 VO2max","4:35-4:50","Series 800-1600m","var(--pink)"],
-    ["Z5 Repeticiones","4:10-4:25","Series 200-400m","var(--red)"]
+    ["5K","24:05","4:49/km","#aaa"],
+    ["10K","51:32","5:09/km","#aaa"],
+    ["15K","1:17:53","5:11/km","#aaa"],
+    ["Media maratón","1:57:58","5:35/km","#aaa"]
   ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
 
-  h+=`<div class="section-title">Zonas de ritmo — Fase avanzada (S15-26)</div>`;
+  h+=`<div class="section-title">Zonas de ritmo · fase inicial (S1-12)</div>`;
   h+=`<div class="zcard">${[
-    ["Z1 Recuperación","6:00-6:30","Post-calidad","#555"],
-    ["Z2 Rodaje fácil","5:20-5:50","Base, tiradas","var(--green)"],
-    ["Z3 Umbral/Tempo","4:40-4:50","Bloques tempo","var(--yellow)"],
-    ["Z4 VO2max","4:20-4:35","Series 800-1600m","var(--pink)"],
-    ["Z5 Repeticiones","4:00-4:15","Series 200-400m","var(--red)"],
+    ["Z1 Recuperación","5:50-6:15","Post-calidad, doblar","#888"],
+    ["Z2 Rodaje fácil","5:30-5:50","Base aeróbica","var(--green)"],
+    ["Z2 Tirada larga","5:35-5:50","Sábados","var(--blue)"],
+    ["Z3 Umbral/Tempo","4:55-5:05","Bloques tempo","var(--yellow)"],
+    ["Z4 VO2max","4:25-4:40","Series 800-1200m","var(--pink)"],
+    ["Z5 Repeticiones","4:15-4:30","Series 400m (1:42-1:48)","var(--red)"]
+  ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
+
+  h+=`<div class="section-title">Zonas de ritmo · fase avanzada (S13-24)</div>`;
+  h+=`<div class="zcard">${[
+    ["Z1 Recuperación","5:40-6:00","Post-calidad","#888"],
+    ["Z2 Rodaje fácil","5:20-5:40","Base, tiradas","var(--green)"],
+    ["Z3 Umbral/Tempo","4:45-4:55","Bloques tempo","var(--yellow)"],
+    ["Z4 VO2max","4:15-4:30","Series 1000-1600m","var(--pink)"],
+    ["Z5 Repeticiones","4:05-4:20","Series 400m","var(--red)"],
     ["HM Ritmo objetivo","4:44","Bloques específicos","var(--orange)"]
   ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
 
   h+=`<div class="section-title">Tests de control</div>`;
-  h+=[[" 31 mayo","Carrera 10K","Obj: 48:30-49:30 · En línea sub 1:40: <48:00"],
-      ["4 julio","Test 5K","Obj: 22:45-23:15 · En línea: <22:45"],
-      ["8 agosto","Test 10K","Obj: 46:00-47:30 · En línea: <46:30"],
-      ["9 septiembre","10K a ritmo HM","Obj: 47:20 (4:44/km) · Controlado = confirmado"]
+  h+=[["31 mayo (dom)","Carrera 10K","Obj: 49:30-50:00 · 4:57-5:00/km · En línea sub 1:40 si <49:30"],
+      ["18 julio (sáb)","Test 5K","Obj: 23:00-23:30 · En línea si <23:00"],
+      ["22 agosto (sáb)","Test 10K","Obj: 47:30-48:30 · En línea si <47:30"],
+      ["19 septiembre (sáb)","10K a ritmo HM","Obj: 47:24 (4:44/km) · Controlado = confirmado"]
   ].map(([d,n,o])=>`<div class="tcard"><div class="td">📅 ${d}</div><div class="tn">${n}</div><div class="to">${o}</div></div>`).join("");
 
-  h+=`<div class="section-title">Estrategia de carrera — 10 oct</div>`;
+  h+=`<div class="section-title">Estrategia de carrera · 10 oct</div>`;
   h+=`<div class="zcard"><h3 style="color:var(--red)">🏁 Media Maratón Sub 1:40</h3>`;
   h+=`${[
-    ["Km 1-3","4:48-4:50","Controlado, NO salir rápido"],
-    ["Km 4-10","4:44-4:46","Crucero, ritmo mecánico"],
-    ["Km 11-16","4:42-4:44","Mantener, concentración"],
-    ["Km 17-21","4:38-4:42","Todo lo que quede"]
+    ["Km 1-3","4:50-4:48","Controlado, NO salir rápido"],
+    ["Km 4-10","4:46-4:44","Asentar, ritmo mecánico"],
+    ["Km 11-16","4:44-4:42","Mantener, concentración"],
+    ["Km 17-21","4:42-4:40","Todo lo que quede"]
   ].map(([n,p,u])=>`<div class="zr"><div><div class="zn">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:var(--red)">${p}</div></div>`).join("")}`;
-  h+=`<div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5">Pasar el 10K en ~47:15-47:30. Si vas más rápido, frena. Si vas más lento de 48:00, el sub 1:40 se complica.</div></div>`;
+  h+=`<div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5">Pasar el 10K en ~47:30. Si vas más rápido, frena. Si pasas el 10K más lento de 48:00, el sub 1:40 se complica.</div></div>`;
+
+  h+=`<div class="section-title">Nutrición · mínimos</div>`;
+  h+=`<div class="zcard">${[
+    ["Proteína diaria","~150 g","Palma de mano cada comida + snack"],
+    ["Carbohidratos","No recortar","Más en día calidad/larga"],
+    ["Calorías","+150-250 kcal","Mantenimiento o ligero superávit"],
+    ["Peso objetivo","+200-300 g/sem","Si >500 g/sem reduce algo"],
+    ["Hidratación","2,5-3 L/día","Más en larga o calor"],
+    ["Día de larga","No ayunas","Avena+plátano+proteína 60-90' antes"]
+  ].map(([n,p,u])=>`<div class="zr"><div><div class="zn">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:var(--green)">${p}</div></div>`).join("")}</div>`;
+
+  h+=`<div class="section-title">Gestión de fatiga</div>`;
+  h+=`<div class="zcard"><div style="font-size:12px;color:var(--text);line-height:1.6">
+    <strong style="color:var(--yellow)">Señales acumuladas:</strong> FC reposo +5-7 ppm varios días · rodaje suave cuesta 2 días · sueño malo · pérdida de ganas (>3 días) · dolor articular nuevo.<br><br>
+    <strong style="color:var(--orange)">1 señal:</strong> mantén plan, quita última serie, afloja 5-10\"/km.<br>
+    <strong style="color:var(--red)">2-3 señales:</strong> cambia sesión dura por rodaje suave 30-40'.<br>
+    <strong style="color:var(--red)">3+ persistentes:</strong> descanso total 1-2 días.<br><br>
+    <strong style="color:var(--green)">Orden al recortar:</strong> 1. Larga (la última) → 2. Fuerza → 3. Calidad → 4. Rodaje medio
+  </div></div>`;
 
   v.innerHTML=h;
 }
@@ -426,7 +523,7 @@ function showDetail(key){
     const r=gstr(info.title,info.week);
     if(r){
       h+=`<div class="ss"><div class="sh"><span class="sn">🟣 ${r.tp}</span><span class="sp">${r.ph}</span></div>`;
-      if(r.light) h+=`<div class="sl">⚡ Sesión ligera: reduce a 2 series</div>`;
+      if(r.light) h+=`<div class="sl">⚡ Sesión ligera: reduce a 2 series por ejercicio</div>`;
       h+=r.ex.map(([n,s,note])=>`<div class="ex"><div><div class="en">${n}</div>${note?`<div class="eno">${note}</div>`:""}</div><div class="es">${s}</div></div>`).join("");
       h+=`</div>`;
     }
@@ -454,7 +551,7 @@ document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>
 // ═══════════ INIT ═══════════
 // Navigate to current month
 const now=new Date();
-if(now>=new Date(2026,3,14)&&now<=new Date(2026,9,12)){curMonth=now.getMonth();curYear=now.getFullYear();}
+if(now>=new Date(2026,3,27)&&now<=new Date(2026,9,11)){curMonth=now.getMonth();curYear=now.getFullYear();}
 renderCal();
 
 // ═══════════ PWA MANIFEST ═══════════
@@ -463,7 +560,7 @@ const ml=document.createElement("link");ml.rel="manifest";ml.href=URL.createObje
 
 // Service worker for offline (inline)
 if("serviceWorker"in navigator){
-  const sw=new Blob([`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>self.clients.claim());self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok){const c=res.clone();caches.open("hm-v1").then(cache=>cache.put(e.request,c));}return res;}).catch(()=>new Response("Offline",{status:503})));});`],{type:"application/javascript"});
+  const sw=new Blob([`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>self.clients.claim());self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok){const c=res.clone();caches.open("hm-v2").then(cache=>cache.put(e.request,c));}return res;}).catch(()=>new Response("Offline",{status:503})));});`],{type:"application/javascript"});
   navigator.serviceWorker.register(URL.createObjectURL(sw)).catch(()=>{});
 }
 </script>
