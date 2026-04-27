@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="HM Sub1:40">
+<meta name="apple-mobile-web-app-title" content="Sub1:40 · Pablo">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0e0e16">
 <title>Plan HM Sub 1:40</title>
@@ -148,7 +148,7 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 <!-- HEADER -->
 <div class="hdr">
   <h1>Media Maratón <span class="ac">Sub 1:40</span></h1>
-  <div class="sub">27 abril → 10 octubre 2026 · 24 semanas</div>
+  <div class="sub">Pablo Legerén · 27 abril → 10 octubre 2026 · 24 semanas · desde VIG-BAY 2:00:58</div>
 </div>
 
 <!-- VIEWS -->
@@ -167,8 +167,8 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 
 <script>
 // ═══════════ DATA ═══════════
-// Plan adaptado a marcas reales: 5K 24:05 · 10K 51:32 · HM 1:57:58 (VDOT ~42)
-// Principiante absoluto en fuerza → 2 sem de aprendizaje técnico
+// Plan adaptado a marcas reales Strava: mejor 10K 51:18 · VIG-BAY 2:00:58 (sin forma) · mejor entreno 15km a 5:12/km
+// Punto de partida real feb 2026. Semana 1 arranca 27/4/2026 (post VIG-BAY)
 const START=new Date(2026,3,27); // lunes 27 abril 2026
 const MES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const DN=["L","M","X","J","V","S","D"];
@@ -268,53 +268,53 @@ function gstr(title,week){
 // Lun: Fuerza A · Mar: Calidad · Mié: Fuerza B · Jue: Rodaje · Vie: Descanso · Sáb: Larga · Dom: Descanso
 const WK=[
 // S1 (27 abr-3 may) Pre-10K · empezamos con fuerza fase 0
-[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","6×400m","8km · 1:50-1:55 · rec 2'00",8],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:50/km",6],["rest","Descanso · movilidad","20-30' + foam roller",0],["long","Tirada larga","10km · 5:35-5:50/km",10],["rest","Descanso","",0]],
+[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","6×400m","Calentamiento 2km suave → 6 repeticiones de 400m a 1:50-1:55 (4:35-4:47/km) · Recuperación: 2' andando o trote muy suave · Enfriamiento 2km · Si en la rep 5-6 no puedes mantener el ritmo, recupérate más",8],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:50/km",6],["rest","Descanso · movilidad","20-30' + foam roller",0],["long","Tirada larga","10km · 5:35-5:50/km",10],["rest","Descanso","",0]],
 // S2 (4-10 may)
-[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","5×800m","9km · 4:25-4:35/km · rec 2'30",9],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:45/km",6],["rest","Descanso · movilidad","",0],["long","Tirada larga","12km · 5:35-5:50/km",12],["rest","Descanso","",0]],
+[["strength","Fuerza A · técnica","Aprendizaje tren inferior",0],["intervals","5×800m","Calentamiento 2km suave → 5 repeticiones de 800m a 4:25-4:35/km (3:32-3:40 por rep) · Recuperación: 2'30\" trotando a 6:00/km · Enfriamiento 2km · Busca ritmo homogéneo: la última rep igual que la primera",9],["strength","Fuerza B · técnica","Aprendizaje tren superior",0],["easy","Rodaje suave","6km · 5:30-5:45/km",6],["rest","Descanso · movilidad","",0],["long","Tirada larga","12km · 5:35-5:50/km",12],["rest","Descanso","",0]],
 // S3 (11-17 may) · empieza fase 1 fuerza
-[["strength","Fuerza A","Sentadilla, RDL, hip thrust con barra",0],["intervals","4×1000m","10km · 4:25-4:35/km · rec 2'30",10],["strength","Fuerza B","Press banca, jalón, militar",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
+[["strength","Fuerza A","Sentadilla, RDL, hip thrust con barra",0],["intervals","4×1000m","Calentamiento 2km suave → 4 repeticiones de 1000m a 4:25-4:35/km (4:25-4:35 por rep) · Recuperación: 2'30\" trote suave · Enfriamiento 2km · Sensación: esfuerzo alto pero controlado, no sprint",10],["strength","Fuerza B","Press banca, jalón, militar",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
 // S4 (18-24 may)
-[["strength","Fuerza A","Tren inferior",0],["tempo","3×2000m","10km · 4:50-5:00/km · rec 3'",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","12km · 5:30-5:45/km",12],["rest","Descanso","",0]],
+[["strength","Fuerza A","Tren inferior",0],["tempo","3×2000m","Calentamiento 2km suave → 3 bloques de 2000m a 4:50-5:00/km (9:40-10:00 por bloque) · Recuperación: 3' andando · Enfriamiento 2km · Ritmo incómodo pero sostenible: podrías hablar frases cortas, no fluido. Es la primera sesión de umbral — no te pases",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","12km · 5:30-5:45/km",12],["rest","Descanso","",0]],
 // S5 (25-31 may) · TAPER + 10K (domingo 31/5)
-[["strength","Fuerza A muy ligera","Solo mantenimiento",0],["intervals","4×400m","5km · 1:50-1:55 · rec 1'30",5],["rest","Descanso","",0],["easy","Rodaje muy suave","5km · 5:40-5:55/km",5],["rest","Descanso pre-carrera","",0],["easy","Trote + 3×100m","3km · activación",3],["race","🏁 CARRERA 10K","Obj: 49:30-50:00 · Salir 4:57-5:00/km",10]],
+[["strength","Fuerza A muy ligera","Solo mantenimiento",0],["intervals","4×400m","Calentamiento 1.5km suave → 4 repeticiones de 400m a 1:50-1:55 (4:35-4:47/km) · Recuperación: 1'30\" andando · Enfriamiento 1km · Sesión corta pre-carrera, solo para activar las piernas, no para cansarse",5],["rest","Descanso","",0],["easy","Rodaje muy suave","5km · 5:40-5:55/km",5],["rest","Descanso pre-carrera","",0],["easy","Trote + 3×100m","2km trote suave (5:50-6:00/km) → 3 rectas de 100m a ~4:00-4:10/km (24-25 seg por recta) · Recuperación: caminar de vuelta al punto de salida (~60\") · Las rectas son para activar, no para fatigarse: sensación de ligereza, no de esfuerzo",3],["race","🏁 CARRERA 10K","Obj: 51:00-52:30 · Salir 5:10-5:15/km controlado",10]],
 // S6 (1-7 jun) · recuperación post-10K
 [["rest","Descanso","Post-10K",0],["easy","Rodaje muy suave","6km · 6:00-6:15/km",6],["strength","Fuerza B","Solo tren superior, sin máximos",0],["easy","Rodaje suave","7km · 5:45-5:55/km",7],["rest","Descanso","",0],["long","Tirada suave","9km · 5:45-5:55/km",9],["rest","Descanso","",0]],
 // S7 (8-14 jun) · base aeróbica 1
-[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×2'","8km · 4:55-5:05 · rec 1'30 trote",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","13km · 5:35-5:50/km",13],["rest","Descanso","",0]],
+[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×2'","Calentamiento 2km suave → Fartlek: 6 acelerones de 2' a 4:55-5:05/km · Recuperación: 1'30\" trotando a 5:45-6:00/km (sin parar) · Enfriamiento 1.5km · El fartlek NO es sprint: es correr a un ritmo que te cuesta pero aguantas. Durante la recuperación sigues moviéndote, no paras",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","13km · 5:35-5:50/km",13],["rest","Descanso","",0]],
 // S8 (15-21 jun)
-[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 3km","9km · 4:55-5:05/km",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
+[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 3km","Calentamiento 3km suave → Bloque continuo de 3km a 4:55-5:05/km (14:45-15:15 total) · Enfriamiento 3km · Es un bloque sin parar: más difícil que el fartlek porque no hay recuperación. Si no puedes mantener el ritmo más de 1km, baja a 5:10/km — es mejor terminar que explotar",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:30-5:45/km",7],["rest","Descanso","",0],["long","Tirada larga","14km · 5:30-5:45/km",14],["rest","Descanso","",0]],
 // S9 (22-28 jun)
-[["strength","Fuerza A","Tren inferior",0],["intervals","6×800m","10km · 4:25-4:35/km · rec 2'00",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:30-5:45/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["rest","Descanso","",0]],
+[["strength","Fuerza A","Tren inferior",0],["intervals","6×800m","Calentamiento 2km suave → 6 repeticiones de 800m a 4:25-4:35/km (3:32-3:40 por rep) · Recuperación: 2' trote suave a ~6:00/km · Enfriamiento 2km · Primera sesión de 6 series: la clave es no salir demasiado rápido en la rep 1. Apunta a que las reps 4-5-6 te cuesten igual que las primeras",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:30-5:45/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["rest","Descanso","",0]],
 // S10 (29 jun-5 jul) · descarga
-[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 4km","9km · 4:55-5:00/km",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","13km · 5:30-5:45/km",13],["rest","Descanso","",0]],
+[["strength","Fuerza A","Tren inferior",0],["tempo","Tempo 4km","Calentamiento 2.5km suave → Bloque continuo de 4km a 4:55-5:00/km (19:40-20:00 total) · Enfriamiento 2.5km · Semana de descarga: el ritmo es el mismo pero el bloque es más corto que lo que vendrá. Debe sentirse manejable",9],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada larga","13km · 5:30-5:45/km",13],["rest","Descanso","",0]],
 // S11 (6-12 jul) · desarrollo 1
-[["strength","Fuerza A","Tren inferior",0],["intervals","6×1000m","11km · 4:25-4:35 · rec 2'00",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["easy","Rodaje suave","3km · 5:50-6:00/km",3]],
+[["strength","Fuerza A","Tren inferior",0],["intervals","6×1000m","Calentamiento 2km suave → 6 repeticiones de 1000m a 4:25-4:35/km (4:25-4:35 por rep) · Recuperación: 2' trote suave · Enfriamiento 2km · El volumen total de calidad sube. Si llegas a la rep 5 y el ritmo se cae más de 10\"/km, termina en esa rep. Calidad antes que cantidad",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","16km · 5:30-5:45/km",16],["easy","Rodaje suave","3km · 5:50-6:00/km",3]],
 // S12 (13-19 jul) · TEST 5K sábado 18/7
-[["strength","Fuerza A","Tren inferior",0],["easy","Rodaje + 5×100m","8km · Z2 + rectas",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 5K","8km total · Obj 23:00-23:30 · máx esfuerzo",8],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
+[["strength","Fuerza A","Tren inferior",0],["easy","Rodaje + 5×100m","6km suave a 5:25-5:40/km → al final: 5 rectas de 100m a ~4:00-4:10/km (24-25 seg) · Recuperación entre rectas: caminar de vuelta tranquilamente (~60-70\") · Las rectas activan el sistema neuromuscular antes del test. No son un sprint al límite: corres rápido pero controlado, con buena técnica",8],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 5K","8km total · Obj 23:00-23:30 · máx esfuerzo",8],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
 // S13 (20-26 jul)
-[["strength","Fuerza A","Tren inferior",0],["intervals","5×1000m","11km · 4:20-4:30/km · rec 2'00",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","17km · 5:25-5:40/km",17],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+[["strength","Fuerza A","Tren inferior",0],["intervals","5×1000m","Calentamiento 2km suave → 5 repeticiones de 1000m a 4:20-4:30/km (4:20-4:30 por rep) · Recuperación: 2' trote suave · Enfriamiento 2km · Ritmo ligeramente más exigente que fase anterior. Sensación: alto esfuerzo, respiración forzada pero controlada. Si puedes hablar con normalidad, ve más rápido",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","17km · 5:25-5:40/km",17],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
 // S14 (27 jul-2 ago)
-[["strength","Fuerza A","Tren inferior",0],["intervals","4×1200m","11km · 4:20-4:30/km · rec 2'30",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:25-5:40/km",18],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+[["strength","Fuerza A","Tren inferior",0],["intervals","4×1200m","Calentamiento 2km suave → 4 repeticiones de 1200m a 4:20-4:30/km (5:12-5:24 por rep) · Recuperación: 2'30\" trote suave · Enfriamiento 2km · Series más largas: el reto es mantener el ritmo en los últimos 300m de cada repetición. Si los primeros 600m los haces muy rápido, los últimos 600m serán un infierno",11],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:25-5:40/km",18],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
 // S15 (3-9 ago) · descarga pre-específica
-[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×3'","10km · 4:40-4:50 · rec 1'30",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:25-5:40/km",6],["rest","Descanso","",0],["long","Tirada larga","14km · 5:25-5:40/km",14],["easy","Rodaje suave","3km · 5:50-6:05/km",3]],
+[["strength","Fuerza A","Tren inferior",0],["tempo","Fartlek 6×3'","Calentamiento 2km suave → Fartlek: 6 acelerones de 3' a 4:40-4:50/km · Recuperación: 1'30\" trotando a 5:40-5:55/km (sin parar) · Enfriamiento 2km · Los bloques son más largos y más rápidos que los de junio. Busca mantener el ritmo objetivo en los últimos 60\" de cada bloque — ahí es donde se entrena",10],["strength","Fuerza B","Tren superior",0],["easy","Rodaje","6km · 5:25-5:40/km",6],["rest","Descanso","",0],["long","Tirada larga","14km · 5:25-5:40/km",14],["easy","Rodaje suave","3km · 5:50-6:05/km",3]],
 // S16 (10-16 ago) · específica HM 1
-[["strength","Fuerza A ligera","Reducir 25% volumen",0],["intervals","5×1200m","12km · 4:15-4:25/km · rec 2'30",12],["strength","Fuerza B ligera","Reducir 25% volumen",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["hm","Tirada con HM","16km · 11 fácil + 5 a 4:50/km",16],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+[["strength","Fuerza A ligera","Reducir 25% volumen",0],["intervals","5×1200m","Calentamiento 2km suave → 5 repeticiones de 1200m a 4:15-4:25/km (5:06-5:18 por rep) · Recuperación: 2'30\" trote suave · Enfriamiento 2km · Ritmo más vivo que antes: aquí el sistema cardiovascular trabaja al límite. Si en la rep 4 no puedes mantener el ritmo, termina en 4 reps — no fuerces",12],["strength","Fuerza B ligera","Reducir 25% volumen",0],["easy","Rodaje","8km · 5:25-5:40/km",8],["rest","Descanso","",0],["hm","Tirada con HM","11km suave a 5:25-5:40/km + últimos 5km a ritmo HM (4:50/km) · Total 16km · Los 5km finales a ritmo de media maratón con piernas ya cargadas — esto simula el km 16-21 de la carrera. Si no puedes mantener 4:50 en los últimos 2km, está bien: termina como puedas",16],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
 // S17 (17-23 ago) · TEST 10K sábado 22/8
-[["strength","Fuerza A ligera","Reducir volumen",0],["easy","Rodaje + 4×200m","8km · Z2 + rectas",8],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 10K","13km total · Obj 47:30-48:30 · máx esfuerzo",13],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
+[["strength","Fuerza A ligera","Reducir volumen",0],["easy","Rodaje + 4×200m","6km suave a 5:25-5:40/km → al final: 4 rectas de 200m a ~4:10-4:20/km (50-52 seg por recta) · Recuperación: trote suave de vuelta al punto de salida (~90\") · Las rectas de 200m activan la velocidad antes del test del sábado. Ritmo rápido pero no a tope: debe sentirse controlado y con buena técnica de brazos",8],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ TEST 10K","13km total · Obj 48:30-50:00 · máx esfuerzo",13],["easy","Rodaje suave","4km · 5:50-6:00/km",4]],
 // S18 (24-30 ago) · específica 3
-[["strength","Fuerza A ligera","Reducir volumen",0],["hm","HM: 3×3km","12km · 4:44/km · rec 2'00",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:20-5:35/km",18],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+[["strength","Fuerza A ligera","Reducir volumen",0],["hm","HM: 3×3km","Calentamiento 2km suave → 3 bloques de 3km exactamente a 4:44/km (14:12 por bloque) · Recuperación: 2' andando o trote muy suave · Enfriamiento 2km · Esta es la sesión más específica del plan: ritmo exacto de carrera. Si no puedes mantener 4:44, ve a 4:50 — es mejor hacerlo bien a 4:50 que mal a 4:44",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","18km · 5:20-5:35/km",18],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
 // S19 (31 ago-6 sep)
-[["strength","Fuerza A ligera","Reducir volumen",0],["intervals","4×1600m","12km · 4:20-4:30/km · rec 2'30",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","20km · 5:20-5:35/km",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+[["strength","Fuerza A ligera","Reducir volumen",0],["intervals","4×1600m","Calentamiento 2km suave → 4 repeticiones de 1600m a 4:20-4:30/km (6:56-7:12 por rep) · Recuperación: 2'30\" trote suave · Enfriamiento 2km · Las series más largas del plan. El objetivo es mantener el ritmo desde el primer hasta el último metro. Divide mentalmente cada 1600m en dos mitades: la primera a 4:25 y la segunda igual",12],["strength","Fuerza B ligera","Reducir volumen",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada larga","20km · 5:20-5:35/km",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
 // S20 (7-13 sep) · empieza mantenimiento fuerza
-[["strength","Fuerza A","Mantenimiento (volumen reducido)",0],["hm","HM: 2×5km","13km · 4:44/km · rec 3'00",13],["strength","Fuerza B","Mantenimiento",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada con HM","20km · 14 fácil + 6 a 4:50/km",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
+[["strength","Fuerza A","Mantenimiento (volumen reducido)",0],["hm","HM: 2×5km","Calentamiento 2km suave → 2 bloques de 5km exactamente a 4:44/km (23:40 por bloque) · Recuperación: 3' andando · Enfriamiento 2km · El bloque más largo a ritmo de carrera. Si en el km 3 del segundo bloque no puedes mantener 4:44, termina ese bloque a 4:50. Escucha las piernas",13],["strength","Fuerza B","Mantenimiento",0],["easy","Rodaje","8km · 5:20-5:35/km",8],["rest","Descanso","",0],["long","Tirada con HM","14km suave a 5:25-5:40/km + últimos 6km a 4:50/km · Total 20km · Llegados aquí, los 6km finales a 4:50 con 14km en las piernas te preparan exactamente para el tramo km 15-21 de octubre",20],["easy","Rodaje suave","4km · 5:40-5:55/km",4]],
 // S21 (14-20 sep) · 10K a ritmo HM sábado 19/9
-[["strength","Fuerza A ligera","Mantenimiento",0],["tempo","Tempo 4km","9km · 4:50-4:55/km",9],["strength","Fuerza B ligera","Mantenimiento",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ 10K a ritmo HM","13km · 4:44/km · controlado · Obj 47:24",13],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+[["strength","Fuerza A ligera","Mantenimiento",0],["tempo","Tempo 4km","Calentamiento 2.5km suave → Bloque continuo de 4km a 4:50-4:55/km (19:20-19:40 total) · Enfriamiento 2.5km · Semana con test el sábado: el tempo es moderado, no te vacíes. Si el ritmo cuesta más de lo normal, recorta a 3km sin problema",9],["strength","Fuerza B ligera","Mantenimiento",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso pre-test","",0],["test","⭐ 10K a ritmo HM","2km calentamiento → 10km a 4:44/km exacto (47:24 total) → 1km enfriamiento · No es máximo esfuerzo: es un 10km controlado a ritmo de carrera. Si llegas al km 8 cómodo, estás listo para octubre",13],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
 // S22 (21-27 sep) · pre-HM 2
-[["strength","Fuerza A ligera","Última con cargas piernas",0],["intervals","4×1km","10km · 4:20-4:30/km · rec 2'00",10],["strength","Fuerza B ligera","Última de superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso","",0],["hm","Tirada con HM","15km · 10 fácil + 5 a 4:50/km",15],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
+[["strength","Fuerza A ligera","Última con cargas piernas",0],["intervals","4×1km","Calentamiento 2km suave → 4 repeticiones de 1000m a 4:20-4:30/km (4:20-4:30 por rep) · Recuperación: 2' trote suave · Enfriamiento 2km · Última sesión de series antes de la carrera. Volumen reducido pero ritmo mantenido — recuerda la forma que tenías en agosto",10],["strength","Fuerza B ligera","Última de superior",0],["easy","Rodaje","7km · 5:25-5:40/km",7],["rest","Descanso","",0],["hm","Tirada con HM","10km suave a 5:30-5:45/km + últimos 5km a 4:50/km · Total 15km · Última tirada larga antes del taper final. Los 5km a 4:50 deben sentirse controlados — si te cuestan mucho, reduce a 3km a ese ritmo",15],["easy","Rodaje suave","4km · 5:45-6:00/km",4]],
 // S23 (28 sep-4 oct) · TAPER HM 1
-[["rest","Descanso o movilidad","Sin fuerza pesada",0],["intervals","5×800m","9km · 4:25/km · rec 2'00",9],["rest","Descanso","",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada media","11km · 5:30-5:45/km",11],["rest","Descanso","",0]],
+[["rest","Descanso o movilidad","Sin fuerza pesada",0],["intervals","5×800m","Calentamiento 2km suave → 5 repeticiones de 800m a 4:25/km (3:32 por rep) · Recuperación: 2' trote suave · Enfriamiento 2km · Semana de taper: el volumen cae pero el ritmo se mantiene. Las piernas deben empezar a sentirse ligeras — si no es así, descansa un día extra",9],["rest","Descanso","",0],["easy","Rodaje","6km · 5:30-5:45/km",6],["rest","Descanso","",0],["long","Tirada media","11km · 5:30-5:45/km",11],["rest","Descanso","",0]],
 // S24 (5-11 oct) · TAPER + HM sábado 10/10
-[["easy","Rodaje suave","4km · 5:35-5:50/km",4],["intervals","3×800m","6km · 4:25/km · rec 2'00",6],["rest","Descanso","",0],["easy","Trote + 4×100m","3km · activación",3],["rest","Descanso","Preparar material",0],["race","🏁 MEDIA MARATÓN","SUB 1:40 · Salir 4:48 → 4:44/km",21],["rest","¡Celebrar!","Recuperación",0]]
+[["easy","Rodaje suave","4km · 5:35-5:50/km",4],["intervals","3×800m","Calentamiento 1.5km suave → 3 repeticiones de 800m a 4:25/km (3:32 por rep) · Recuperación: 2' trote suave · Enfriamiento 1.5km · Sesión corta para recordarle a las piernas lo que es correr rápido. Sin forzar, sin apurar",6],["rest","Descanso","",0],["easy","Trote + 4×100m","2km trote suave (5:45-6:00/km) → 4 rectas de 100m a ~4:00-4:10/km (24-25 seg) · Recuperación: caminar de vuelta al punto de salida · Activación final: las rectas deben sentirse ligeras y fluidas, como si las piernas estuvieran frescas y con ganas",3],["rest","Descanso","Preparar material, dorsal, avituallamiento",0],["race","🏁 MEDIA MARATÓN","SUB 1:40 · Salir 4:48-4:52/km los primeros 3km · Objetivo 10K en 47:30",21],["rest","¡Celebrar!","Recuperación",0]]
 ];
 
 // ═══════════ HELPERS ═══════════
@@ -438,22 +438,23 @@ function renderWeeks(){
 // ═══════════ RENDER ZONES ═══════════
 function renderInfo(){
   const v=document.getElementById("v-info");
-  let h=`<div class="section-title">Marcas actuales · base del plan</div>`;
+  let h=`<div class="section-title">Marcas reales · Strava · base del plan</div>`;
   h+=`<div class="zcard">${[
-    ["5K","24:05","4:49/km","#aaa"],
-    ["10K","51:32","5:09/km","#aaa"],
-    ["15K","1:17:53","5:11/km","#aaa"],
-    ["Media maratón","1:57:58","5:35/km","#aaa"]
+    ["5K estimado","~25:30","5:06/km · proyectado desde entrenos feb 2026","#aaa"],
+    ["10K mejor","51:18","5:08/km · Vintage Run jun 2024 (plano)","#aaa"],
+    ["15K mejor","1:18:21","5:12/km · 22 feb 2026 · mejor día del año","#aaa"],
+    ["VIG-BAY 21K","2:00:58","5:38/km · abr 2026 · sin forma pico + bajón km16","#aaa"]
   ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
+  h+=`<div class="zcard" style="border-left:3px solid var(--yellow)"><div style="font-size:11px;color:var(--yellow);font-weight:700;margin-bottom:4px">⚠ Contexto VIG-BAY</div><div style="font-size:12px;color:#aaa;line-height:1.5">Carrera completada tras 1 mes sin entrenar (boda + luna de miel). Bajón al km 16. No refleja la forma real — los entrenos de ene-feb 2026 a 5:12/km en 15km son el verdadero punto de partida.</div></div>`;
 
   h+=`<div class="section-title">Zonas de ritmo · fase inicial (S1-12)</div>`;
   h+=`<div class="zcard">${[
     ["Z1 Recuperación","5:50-6:15","Post-calidad, doblar","#888"],
-    ["Z2 Rodaje fácil","5:30-5:50","Base aeróbica","var(--green)"],
-    ["Z2 Tirada larga","5:35-5:50","Sábados","var(--blue)"],
-    ["Z3 Umbral/Tempo","4:55-5:05","Bloques tempo","var(--yellow)"],
+    ["Z2 Rodaje fácil","5:25-5:50","Base aeróbica · tu zona habitual","var(--green)"],
+    ["Z2 Tirada larga","5:30-5:50","Sábados · sin forzar","var(--blue)"],
+    ["Z3 Umbral/Tempo","5:00-5:10","Bloques tempo · cuesta pero se aguanta","var(--yellow)"],
     ["Z4 VO2max","4:25-4:40","Series 800-1200m","var(--pink)"],
-    ["Z5 Repeticiones","4:15-4:30","Series 400m (1:42-1:48)","var(--red)"]
+    ["Z5 Repeticiones","4:15-4:30","Series 400m","var(--red)"]
   ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
 
   h+=`<div class="section-title">Zonas de ritmo · fase avanzada (S13-24)</div>`;
@@ -467,21 +468,21 @@ function renderInfo(){
   ].map(([n,p,u,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:${c}">${p}</div></div>`).join("")}</div>`;
 
   h+=`<div class="section-title">Tests de control</div>`;
-  h+=[["31 mayo (dom)","Carrera 10K","Obj: 49:30-50:00 · 4:57-5:00/km · En línea sub 1:40 si <49:30"],
-      ["18 julio (sáb)","Test 5K","Obj: 23:00-23:30 · En línea si <23:00"],
-      ["22 agosto (sáb)","Test 10K","Obj: 47:30-48:30 · En línea si <47:30"],
-      ["19 septiembre (sáb)","10K a ritmo HM","Obj: 47:24 (4:44/km) · Controlado = confirmado"]
+  h+=[["31 mayo (dom)","🏁 Carrera 10K","Obj: 51:00-52:30 · 5:06-5:15/km · Realista desde VIG-BAY. Sub 51' = en línea perfecta para sub 1:40"],
+      ["18 julio (sáb)","⭐ Test 5K","Obj: 24:30-25:30 · En línea si <24:30. Si no has entrenado bien, puede ser más lento"],
+      ["22 agosto (sáb)","⭐ Test 10K","Obj: 48:30-50:00 · Sub 48:30 = vas a bajar de 1:40. 48:30-50:00 = muy cerca"],
+      ["19 septiembre (sáb)","10K a ritmo HM","Obj: 47:24 (4:44/km) controlado · Si lo aguantas a pulsaciones razonables = confirmado sub 1:40"]
   ].map(([d,n,o])=>`<div class="tcard"><div class="td">📅 ${d}</div><div class="tn">${n}</div><div class="to">${o}</div></div>`).join("");
 
-  h+=`<div class="section-title">Estrategia de carrera · 10 oct</div>`;
+  h+=`<div class="section-title">Estrategia de carrera · oct 2026</div>`;
   h+=`<div class="zcard"><h3 style="color:var(--red)">🏁 Media Maratón Sub 1:40</h3>`;
   h+=`${[
-    ["Km 1-3","4:50-4:48","Controlado, NO salir rápido"],
-    ["Km 4-10","4:46-4:44","Asentar, ritmo mecánico"],
-    ["Km 11-16","4:44-4:42","Mantener, concentración"],
-    ["Km 17-21","4:42-4:40","Todo lo que quede"]
+    ["Km 1-3","4:50-4:52","Salir conservador. El primer km siempre engaña — frena aunque te sientas bien"],
+    ["Km 4-10","4:46-4:44","Asentar el ritmo. Pasar el 10K en ~47:30-48:00"],
+    ["Km 11-16","4:44-4:42","Mantener. Este fue el km 16 donde bajaste en VIG-BAY — con prep, no ocurre"],
+    ["Km 17-21","4:42-4:38","Todo lo que quede en el depósito"]
   ].map(([n,p,u])=>`<div class="zr"><div><div class="zn">${n}</div><div class="zu">${u}</div></div><div class="zp" style="color:var(--red)">${p}</div></div>`).join("")}`;
-  h+=`<div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5">Pasar el 10K en ~47:30. Si vas más rápido, frena. Si pasas el 10K más lento de 48:00, el sub 1:40 se complica.</div></div>`;
+  h+=`<div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5">Pasar el 10K en ~47:30-48:00. Si vas más rápido, frena. Si pasas el 10K más lento de 48:30, el sub 1:40 se complica mucho. La clave es llegar al km 16 con piernas — en VIG-BAY bajaste aquí por falta de entreno, no por falta de capacidad.</div></div>`;
 
   h+=`<div class="section-title">Nutrición · mínimos</div>`;
   h+=`<div class="zcard">${[
