@@ -96,6 +96,16 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 .ex .en{font-size:12px;font-weight:600;color:#d0d0e0}
 .ex .eno{font-size:10px;color:#444;margin-top:1px}
 .ex .es{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--purple);white-space:nowrap;flex-shrink:0;margin-left:10px}
+.lg{padding:2px 0 10px;border-bottom:1px solid #1a1a26}
+.lg:last-child{border-bottom:none}
+.lgprev{font-family:'JetBrains Mono',monospace;font-size:10px;color:#556;margin-bottom:5px}
+.setgrid{display:flex;flex-wrap:wrap;gap:6px}
+.setbox{display:flex;flex-direction:column;align-items:center;gap:2px}
+.setbox label{font-size:8px;color:#555;font-weight:700;font-family:'JetBrains Mono',monospace}
+.setbox .pair{display:flex;gap:3px}
+.setbox input{width:46px;background:#0e0e18;border:1px solid #2a2a3a;border-radius:7px;color:#d8d8e4;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 2px;text-align:center}
+.setbox input::placeholder{color:#3a3a4a}
+.setbox input:focus{outline:none;border-color:var(--purple)}
 .mob-zone{margin-top:12px}
 .mob-zone .mzh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin-bottom:4px}
 .mex{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid #1a1a26}
@@ -110,6 +120,8 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 .zr .zn{font-size:13px;font-weight:600}
 .zr .zp{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500}
 .zr .zu{font-size:10px;color:#555}
+.databtn{flex:1;background:#2a2a3a;border:none;color:#ccc;padding:10px 0;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.databtn:active{background:#33334a}
 .section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px 4px}
 .hidden{display:none!important}
 </style>
@@ -245,6 +257,36 @@ function gstr(title,week){
   const p=week<=2?"adapt":"hyper";
   return{...STR[key][p],tp:title.replace(/ · .*/,""),light:/ligera|muy ligera|descarga|reducid/i.test(title)};
 }
+
+// ── REGISTRO DE PESOS (localStorage) ──
+// Estructura: { "<claveDia>": { "<ejercicio>": [ {w:kg, r:reps}, ... ] } }
+const LOGKEY="gymlog-v1";
+let LOG=(()=>{try{return JSON.parse(localStorage.getItem(LOGKEY))||{}}catch(e){return{}}})();
+function saveLog(){try{localStorage.setItem(LOGKEY,JSON.stringify(LOG))}catch(e){}}
+// nº de series a partir del esquema ("4×6-8" → 4)
+function nsets(s){const m=s.match(/^(\d+)\s*×/);return m?+m[1]:3;}
+// ejercicios por tiempo (plancha, colgarse, rutina postural): no se registra peso
+function isTime(s){return /[″']/.test(s);}
+function setDone(x){return x&&(x.w!=null||x.r!=null);}
+function hasLog(k){const l=LOG[k];if(!l)return false;return Object.values(l).some(a=>Array.isArray(a)&&a.some(setDone));}
+function countLogged(){return Object.keys(LOG).filter(hasLog).length;}
+function fmtSets(sets){
+  const done=sets.map(x=>setDone(x)?((x.w!=null?String(x.w).replace(".",","):"–")+"×"+(x.r!=null?x.r:"–")):null).filter(Boolean);
+  return done.join(" · ");
+}
+// última sesión anterior con ese ejercicio registrado
+function prevEntry(ex,curDate){
+  let best=null,bestD=null;
+  for(const k in LOG){
+    const day=LOG[k];
+    if(!day||!Array.isArray(day[ex])||!day[ex].some(setDone))continue;
+    const info=DAYS[k];
+    if(!info)continue;
+    if(info.date<curDate&&(!bestD||info.date>bestD)){bestD=info.date;best=day[ex];}
+  }
+  return best?{d:bestD,sets:best}:null;
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
 
 // ── MOVILIDAD ──
 const MOB={
@@ -391,6 +433,7 @@ const WK=[
 // ── HELPERS ──
 function dt(w,d){const r=new Date(START);r.setDate(r.getDate()+(w-1)*7+d);return r;}
 function fmtD(d){return d.getDate()+" "+MES[d.getMonth()].slice(0,3).toLowerCase();}
+function fmtShort(d){return d.getDate()+"/"+(d.getMonth()+1);}
 function dayMap(){
   const m={};
   for(let w=0;w<8;w++)for(let d=0;d<7;d++){
@@ -423,18 +466,19 @@ function renderCal(){
   h+=`<div class="grid">`;
   for(let i=0;i<sd;i++)h+=`<div class="c empty"></div>`;
   for(let d=1;d<=dim;d++){
-    const info=DAYS[curYear+"-"+curMonth+"-"+d];
+    const key=curYear+"-"+curMonth+"-"+d;
+    const info=DAYS[key];
     const t=info?TC[info.type]||TC.rest:null;
     const isToday=today.getFullYear()===curYear&&today.getMonth()===curMonth&&today.getDate()===d;
     const ph=info?gp(info.week):null;
     const pos=(sd+d-1)%7;
     if(info){
-      h+=`<div class="c" style="background:${t.bg};border-color:${t.bd}" data-key="${curYear}-${curMonth}-${d}">`;
+      h+=`<div class="c" style="background:${t.bg};border-color:${t.bd}" data-key="${key}">`;
       h+=`<div class="dn${isToday?" today":""}">${d}</div>`;
       if(pos===0)h+=`<span class="wt" style="color:${ph?.c||"#555"}">S${info.week}</span>`;
       h+=`<div class="dt" style="color:${t.ac}">${info.title}</div>`;
       if(info.km>0)h+=`<div class="dk">${info.km}km</div>`;
-      if(info.type==="strength")h+=`<div class="dh" style="color:${t.ac}">ver rutina ↗</div>`;
+      if(info.type==="strength")h+=`<div class="dh" style="color:${hasLog(key)?"var(--green)":t.ac}">${hasLog(key)?"✔ registrado":"ver rutina ↗"}</div>`;
       if(info.type==="mobility")h+=`<div class="dh" style="color:${t.ac}">ver ejercicios ↗</div>`;
       h+=`</div>`;
     }else{
@@ -475,7 +519,7 @@ function renderWeeks(){
       h+=`<div class="wbar" style="background:${tc.ac};opacity:${type==="rest"?.3:.8}"></div>`;
       h+=`<div class="wdi"><div class="t" style="color:${tc.ac}">${title}</div>`;
       if(detail)h+=`<div class="det">${detail}</div>`;
-      if(type==="strength")h+=`<div class="bdg" style="color:${tc.ac}">ver rutina ↗</div>`;
+      if(type==="strength")h+=`<div class="bdg" style="color:${hasLog(key)?"var(--green)":tc.ac}">${hasLog(key)?"✔ pesos registrados":"ver rutina ↗"}</div>`;
       if(type==="mobility")h+=`<div class="bdg" style="color:${tc.ac}">ver ejercicios ↗</div>`;
       if(km>0)h+=`<div class="bdg" style="color:#555">${km} km</div>`;
       h+=`</div></div>`;
@@ -496,6 +540,14 @@ function renderInfo(){
   let h=`<div class="section-title">Objetivo del bloque</div>`;
   h+=`<div class="zcard" style="border-left:3px solid var(--purple)"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:var(--purple)">1. Estética y masa muscular</strong> — 4 sesiones de gym intocables. Newbie gains: el periodo donde creces más rápido que nunca.<br><strong style="color:var(--teal)">2. Postura</strong> — ratio tirón/empuje favorable, rutina postural diaria de 5'.<br><strong style="color:var(--green)">3. Base aeróbica para deportes</strong> — 2 sesiones de cardio/deporte: suficiente para jugar a fútbol, pádel o salir a correr sin sufrir.</div></div>`;
 
+  h+=`<div class="section-title">Registro de pesos · datos</div>`;
+  h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6">Toca cualquier día de fuerza y apunta kg y reps de cada serie: se guardan solos y la próxima vez verás tu marca anterior. Los datos viven en <strong style="color:#d0d0e0">este navegador</strong> (localStorage): no se sincronizan entre dispositivos. Usa siempre el mismo y exporta una copia de vez en cuando.<br><br>Sesiones con registro: <strong style="color:var(--purple)">${countLogged()}</strong></div>
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button class="databtn" id="btnexp">⬇ Exportar copia</button>
+    <button class="databtn" id="btnimp">⬆ Importar copia</button>
+  </div>
+  <input type="file" id="impfile" accept=".json,application/json" hidden></div>`;
+
   h+=`<div class="section-title">Distribución semanal · todas ≤ 1h</div>`;
   h+=`<div class="zcard">${[["Lunes","🏋️ Tren inferior — sentadilla, RDL, hip thrust, unilateral","var(--purple)"],["Martes","🏋️ Superior A — empuje (press banca, militar) + ancho (jalón, remo)","var(--purple)"],["Miércoles","🏃 Cardio libre — rodaje, bici, elíptica o intervalos","var(--green)"],["Jueves","🏋️ Superior B — tirón (remo barra, dominadas) + hombro lateral","var(--purple)"],["Viernes","🏋️ Accesorios — brazos, laterales, core, postural","var(--purple)"],["Sábado","⚽ Deporte o cardio — pádel, fútbol, carrera, o descanso","var(--yellow)"],["Domingo","😴 Descanso","#555"]].map(([n,d,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${d}</div></div></div>`).join("")}</div>`;
 
@@ -503,7 +555,7 @@ function renderInfo(){
   h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:#d0d0e0">Tren inferior 1 vez:</strong> parece poco, pero tus piernas ya reciben estímulo del cardio del miércoles y el deporte del sábado. Un segundo día pesado competiría y te dejaría con las piernas cargadas para el fin de semana.<br><br><strong style="color:#d0d0e0">Superior 2 veces:</strong> donde más margen de mejora estética tienes. Espalda ancha, pecho, hombros laterales y brazos. Dos sesiones permiten separar empuje/tirón con volumen suficiente (~16-18 series/semana por grupo).<br><br><strong style="color:#d0d0e0">Accesorios viernes:</strong> sesión de bajo coste sistémico. Brazos, hombro lateral y core no generan fatiga que interfiera con el sábado, y son los grupos con más impacto visual por serie invertida.<br><br><strong style="color:#d0d0e0">Sábado deporte:</strong> la sesión comodín. Pádel, fútbol, carrera, bici — lo que surja. Eso es lo que mantiene la base aeróbica sin estructura rígida.</div></div>`;
 
   h+=`<div class="section-title">Progresión de pesos</div>`;
-  h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:var(--yellow)">Reglas:</strong><br>• Deja siempre 3-4 reps en el tanque. NUNCA al fallo.<br>• Si la técnica se rompe, para la serie. No importa el peso.<br>• Sube carga solo cuando completes el rango superior de reps con buena técnica 2 sesiones seguidas.<br>• Compuestos: +2,5 kg/semana las primeras 4-5 semanas. Luego más lento.<br>• Peso muerto convencional con barra: NO antes de la semana 5-6 y solo si ya controlas el RDL.</div></div>`;
+  h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:var(--yellow)">Reglas:</strong><br>• Deja siempre 3-4 reps en el tanque. NUNCA al fallo.<br>• Si la técnica se rompe, para la serie. No importa el peso.<br>• Sube carga solo cuando completes el rango superior de reps con buena técnica 2 sesiones seguidas — el registro de cada sesión te lo dice sin memoria.<br>• Compuestos: +2,5 kg/semana las primeras 4-5 semanas. Luego más lento.<br>• Peso muerto convencional con barra: NO antes de la semana 5-6 y solo si ya controlas el RDL.</div></div>`;
 
   h+=`<div class="section-title">Resultados esperados</div>`;
   h+=`<div class="zcard">${[["Fuerza (S2-4)","Lo primero que cambia. Adaptación neural: el cuerpo aprende a reclutar fibras. Sentadilla de 40→70+ kg, press banca de 35→55+ kg","var(--purple)"],["Tú en el espejo (S6-8)","Hombros más redondos, brazos con más forma, espalda más densa. Tú lo ves, los demás todavía no","var(--blue)"],["Los demás (S10-14)","La gente empieza a decir 'estás diferente'. Requiere mantener la consistencia después de agosto","var(--green)"],["Recomposición","Con déficit suave (-200/-300 kcal) y 160-175 g proteína: pierde 2-3 kg de grasa + gana 1-1,5 kg de músculo. De 88→85-86 kg","var(--orange)"]].map(([n,d,c])=>`<div class="zr" style="align-items:flex-start"><div><div class="zn" style="color:${c}">${n}</div><div class="zu" style="line-height:1.4">${d}</div></div></div>`).join("")}</div>`;
@@ -549,6 +601,32 @@ function renderInfo(){
   h+=`<div class="zcard" style="border-left:3px solid var(--purple)"><div style="font-size:12px;color:#aaa;line-height:1.6">Estos dos meses son los cimientos. El salto real en estética viene si mantienes 4 sesiones de gym en otoño con la base neural ya hecha. En septiembre podrás decidir si quieres: mantener esta estructura, meter más volumen de gym (5-6 sesiones), o retomar running con un objetivo de carrera para primavera. Cualquier opción funciona porque la base muscular ya estará puesta.</div></div>`;
 
   v.innerHTML=h;
+
+  // Exportar / importar registro
+  document.getElementById("btnexp")?.addEventListener("click",()=>{
+    const data=JSON.stringify(LOG,null,1);
+    const b=new Blob([data],{type:"application/json"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(b);
+    a.download="registro-gym-"+new Date().toISOString().slice(0,10)+".json";
+    document.body.appendChild(a);a.click();a.remove();
+  });
+  document.getElementById("btnimp")?.addEventListener("click",()=>document.getElementById("impfile").click());
+  document.getElementById("impfile")?.addEventListener("change",e=>{
+    const f=e.target.files[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{
+      try{
+        const inc=JSON.parse(rd.result);
+        if(typeof inc!=="object"||inc===null||Array.isArray(inc))throw 0;
+        LOG={...LOG,...inc}; // los días importados sobreescriben los locales
+        saveLog();
+        renderInfo();
+        alert("Registro importado correctamente.");
+      }catch(_){alert("El archivo no es un registro válido.");}
+    };
+    rd.readAsText(f);
+  });
 }
 
 // ── OVERLAY ──
@@ -566,12 +644,30 @@ function showDetail(key){
   if(info.type==="strength"){
     const r=gstr(info.title,info.week);
     if(r){
+      const dayLog=LOG[key]||{};
       h+=`<div class="ss"><div class="sh"><span class="sn">🟣 ${r.tp}</span><span class="sp">${r.ph}</span></div>`;
       if(r.light)h+=`<div class="sl">⚡ Sesión ligera: reduce a 2-3 series por ejercicio</div>`;
+      h+=`<div style="font-size:10px;color:#556;margin-bottom:6px">Apunta kg y reps de cada serie — se guarda solo.</div>`;
       h+=r.ex.map(([n,s,note])=>{
         let row='<div class="ex"><div><div class="en">'+n+'</div>';
         if(note)row+='<div class="eno">'+note+'</div>';
         row+='</div><div class="es">'+s+'</div></div>';
+        if(!isTime(s)){
+          const ns=nsets(s),saved=dayLog[n]||[];
+          const prev=prevEntry(n,info.date);
+          row+='<div class="lg">';
+          if(prev)row+='<div class="lgprev">Anterior ('+fmtShort(prev.d)+'): '+fmtSets(prev.sets)+'</div>';
+          row+='<div class="setgrid">';
+          for(let i=0;i<ns;i++){
+            const st=saved[i]||{};
+            const exa=esc(n);
+            row+='<div class="setbox"><label>S'+(i+1)+'</label><div class="pair">'
+              +'<input class="iw" type="text" inputmode="decimal" placeholder="kg" value="'+(st.w!=null?st.w:"")+'" data-d="'+key+'" data-ex="'+exa+'" data-s="'+i+'">'
+              +'<input class="ir" type="text" inputmode="numeric" placeholder="rep" value="'+(st.r!=null?st.r:"")+'" data-d="'+key+'" data-ex="'+exa+'" data-s="'+i+'">'
+              +'</div></div>';
+          }
+          row+='</div></div>';
+        }
         return row;
       }).join("");
       h+=`</div>`;
@@ -586,7 +682,28 @@ function showDetail(key){
   document.getElementById("overlay").classList.add("open");
 }
 
-function closeOverlay(){document.getElementById("overlay").classList.remove("open");}
+// Guardado automático de los inputs de registro (delegado: sobrevive a re-renders)
+document.getElementById("ocontent").addEventListener("input",e=>{
+  const t=e.target;
+  const isW=t.classList.contains("iw"),isR=t.classList.contains("ir");
+  if(!isW&&!isR)return;
+  const d=t.dataset.d,ex=t.dataset.ex,s=+t.dataset.s;
+  if(!LOG[d])LOG[d]={};
+  if(!Array.isArray(LOG[d][ex]))LOG[d][ex]=[];
+  const set=LOG[d][ex][s]||{};
+  const raw=t.value.trim().replace(",",".");
+  const v=raw===""?null:(isNaN(parseFloat(raw))?null:parseFloat(raw));
+  if(isW)set.w=v;else set.r=v;
+  LOG[d][ex][s]=set;
+  saveLog();
+});
+// Al cerrar la ficha, refrescar las marcas de "registrado" en la vista activa
+function refreshViews(){
+  if(curTab==="cal")renderCal();
+  if(curTab==="weeks")renderWeeks();
+}
+
+function closeOverlay(){document.getElementById("overlay").classList.remove("open");refreshViews();}
 document.getElementById("oclose").addEventListener("click",closeOverlay);
 document.getElementById("overlay").addEventListener("click",e=>{if(e.target===e.currentTarget)closeOverlay();});
 
@@ -597,7 +714,7 @@ document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>
   document.getElementById("v-weeks").classList.toggle("hidden",curTab!=="weeks");
   document.getElementById("v-info").classList.toggle("hidden",curTab!=="info");
   if(curTab==="weeks"&&!document.getElementById("v-weeks").innerHTML)renderWeeks();
-  if(curTab==="info"&&!document.getElementById("v-info").innerHTML)renderInfo();
+  if(curTab==="info")renderInfo();
 }));
 
 const now=new Date();
@@ -606,8 +723,9 @@ renderCal();
 
 const mblob=new Blob([JSON.stringify({name:"Plan Verano Gym+Cardio",short_name:"Gym+Cardio",start_url:".",display:"standalone",background_color:"#0e0e16",theme_color:"#0e0e16",icons:[{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230e0e16' width='100' height='100' rx='22'/><text x='50' y='65' text-anchor='middle' font-size='55'>🏋️</text></svg>",sizes:"any",type:"image/svg+xml"}]})],{type:"application/json"});
 const ml=document.createElement("link");ml.rel="manifest";ml.href=URL.createObjectURL(mblob);document.head.appendChild(ml);
+// SW network-first: al desplegar cambios en GitHub Pages se ven a la primera; la caché solo entra sin conexión
 if("serviceWorker"in navigator){
-  const sw=new Blob([`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>self.clients.claim());self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok){const c=res.clone();caches.open("gym-v1").then(cache=>cache.put(e.request,c));}return res;}).catch(()=>new Response("Offline",{status:503})));});`],{type:"application/javascript"});
+  const sw=new Blob([`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!=="gym-v2").map(k=>caches.delete(k)))).then(()=>self.clients.claim())));self.addEventListener("fetch",e=>{e.respondWith(fetch(e.request).then(res=>{if(res.ok){const c=res.clone();caches.open("gym-v2").then(cache=>cache.put(e.request,c));}return res;}).catch(()=>caches.match(e.request).then(r=>r||new Response("Offline",{status:503}))));});`],{type:"application/javascript"});
   navigator.serviceWorker.register(URL.createObjectURL(sw)).catch(()=>{});
 }
 </script>
