@@ -134,7 +134,7 @@ body{padding:calc(12px + var(--st)) 8px calc(66px + var(--sb))}
 </div>
 <div class="hdr">
   <h1>Verano Madrid <span class="ac">Gym + Cardio</span></h1>
-  <div class="sub">8 semanas · 29 jun → 23 ago 2026 · 4 gym + 2 cardio/deporte · estética + base aeróbica</div>
+  <div class="sub">8 semanas · 29 jun → 23 ago 2026 · 4 gym + 2 cardio/deporte</div>
 </div>
 <div id="v-cal"></div>
 <div id="v-weeks" class="hidden"></div>
@@ -174,88 +174,85 @@ const TC={
 
 // ── FUERZA ──
 const STR={
-  inferior:{
+  empuje:{
+    adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
+      ["Press banca con mancuernas","3×10","Aprendizaje del patrón de empuje · 90″"],
+      ["Press militar mancuernas sentado","3×10","Controlado · sin arquear la lumbar · 90″"],
+      ["Press inclinado mancuernas","3×10","Pecho superior · ligero · 90″"],
+      ["Elevaciones laterales","3×12","Hombro lateral · sin balanceo · 60″"],
+      ["Tríceps en polea","2×12","Codos pegados al cuerpo · 60″"]
+    ]},
+    hyper:{ph:"Hipertrofia (S3-8)",ex:[
+      ["Press banca con barra","4×6-8","Compuesto principal · RPE 7-8 · deja 3 reps en el tanque · 2'30″"],
+      ["Press militar de pie","3×8-10","Core implicado · si el hombro dcho molesta: sentado, mancuernas, menos rango · 2'"],
+      ["Press inclinado mancuernas","3×10-12","Pecho superior · estética · 90″"],
+      ["Elevaciones laterales","4×12-15","La clave visual del hombro · peso ligero, cero balanceo · 60″"],
+      ["Extensión de tríceps en polea","3×10-12","Definición de brazo · 60″"]
+    ]}
+  },
+  tiron:{
+    adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
+      ["Jalón al pecho","3×10","Escápulas abajo y atrás antes de tirar · 90″"],
+      ["Remo máquina pecho apoyado","3×10","Tracción horizontal · sin trampa lumbar · 90″"],
+      ["Remo mancuerna un brazo","3×10/lado","Espalda plana · sin girar el tronco · 90″"],
+      ["Face pulls polea","3×15","Salud de hombro · postura · 45″"],
+      ["Curl con mancuernas","2×12","Sin balanceo · 60″"]
+    ]},
+    hyper:{ph:"Hipertrofia (S3-8)",ex:[
+      ["Jalón al pecho / dominadas negativas","4×8-10","Ancho de espalda · objetivo: 5 dominadas completas en agosto · 2'"],
+      ["Remo con barra (Pendlay)","4×8-10","El ejercicio más importante para tu espalda · 2'"],
+      ["Remo máquina pecho apoyado","3×10-12","Densidad de espalda sin fatiga lumbar · 90″"],
+      ["Face pulls","3×15","Salud de hombro · nunca quitar · 45″"],
+      ["Curl con barra o mancuernas","3×10-12","Bíceps · 60″"]
+    ]}
+  },
+  pierna:{
     adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
       ["Goblet squat","3×10","Mancuerna al pecho · control total · 90″"],
       ["RDL con mancuernas","3×10","Bisagra de cadera estricta · 90″"],
       ["Hip thrust solo barra","3×12","Sin discos · aprender el patrón · 90″"],
       ["Zancada estática","3×8/pierna","Sin peso o carga ligera · 90″"],
-      ["Plancha frontal","3×30″","Core anti-extensión · 45″"],
-      ["Elevación de gemelos","3×15","Salud aquiles · 60″"]
+      ["Elevación de gemelos","3×15","Salud aquiles · 60″"],
+      ["Plancha frontal","3×30″","Core anti-extensión · 45″"]
     ]},
     hyper:{ph:"Hipertrofia (S3-8)",ex:[
       ["Sentadilla trasera con barra","4×6-8","RPE 7-8 · deja 3 reps en el tanque · 2'30″"],
       ["Peso muerto rumano con barra","3×8-10","Técnica antes que peso · 2'"],
-      ["Hip thrust con barra","3×10-12","Glúteo principal · 90″"],
-      ["Bulgarian split squat","3×8/pierna","Unilateral · carga moderada · 90″"],
+      ["Hip thrust con barra","3×10","Glúteo principal · 90″"],
       ["Ext. de espalda / hiperextensión","3×12-15","Erector + glúteo · clave para tu lumbar · 60″"],
-      ["Elevación de gemelos de pie","3×15","Salud aquiles · 60″"]
+      ["Elevación de gemelos de pie","3×15","Salud aquiles · 60″"],
+      ["Plancha frontal","3×45″","Core anti-extensión · 45″"]
     ]}
   },
-  supA:{
+  torso:{
     adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
-      ["Press banca con mancuernas","3×10","Aprendizaje del patrón de empuje · 90″"],
-      ["Jalón al pecho","3×10","Tracción vertical · escápulas abajo antes de tirar · 90″"],
-      ["Press militar mancuernas sentado","3×10","Controlado · sin arquear la lumbar · 90″"],
-      ["Remo máquina pecho apoyado","3×10","Tracción horizontal · sin trampa lumbar · 90″"],
-      ["Face pulls polea","3×15","Salud de hombro · postura · 45″"]
-    ]},
-    hyper:{ph:"Hipertrofia (S3-8)",ex:[
-      ["Press banca con barra","4×6-8","Compuesto principal de empuje · 2'30″"],
-      ["Jalón al pecho","4×8-10","Ancho de espalda · postura · 2'"],
-      ["Press militar de pie","3×8-10","Core implicado · si el hombro dcho molesta, sentado con mancuerna · 2'"],
-      ["Remo máquina pecho apoyado","3×10-12","Postura · completa el tirón · 90″"],
-      ["Cruces en polea / aperturas","2×12-15","Pecho · estética · 60″"],
-      ["Face pulls","3×15-20","Salud de hombro · nunca quitar · 45″"]
-    ]}
-  },
-  supB:{
-    adapt:{ph:"Aprendizaje técnico (S1-2)",ex:[
-      ["Remo mancuerna un brazo","3×10/lado","Espalda plana · sin girar el tronco · 90″"],
-      ["Press inclinado mancuernas","3×10","Pecho superior · 90″"],
+      ["Remo mancuerna un brazo","3×10/lado","Segunda pasada al patrón de remo · 90″"],
+      ["Press banca con mancuernas","3×10","Refuerza el patrón del lunes · 90″"],
+      ["Jalón agarre neutro","3×10","Variante de tracción vertical · 90″"],
       ["Band pull-apart","3×15","Postura · escápulas juntas al final · 45″"],
-      ["Elevaciones laterales","3×12","Hombro lateral · sin balanceo · 60″"],
+      ["Elevaciones laterales","2×12","Hombro lateral · 60″"],
       ["Curl + tríceps superset","2×12","Brazos · sin descanso entre ambos · 60″ tras la ronda"]
     ]},
     hyper:{ph:"Hipertrofia (S3-8)",ex:[
-      ["Remo con barra (Pendlay)","4×8-10","El ejercicio más importante para tu espalda · 2'"],
-      ["Press inclinado mancuernas","3×8-10","Pecho superior · estética · 2'"],
-      ["Dominadas / negativas","4×max (o 4-5 neg.)","Objetivo: 5 dominadas completas en agosto · 2'"],
-      ["Elevaciones laterales","3×12-15","Hombro lateral · visual de ancho · 60″"],
-      ["Curl bíceps + ext. tríceps superset","3×10-12","Brazos · sin descanso entre ambos · 60″ tras la ronda"],
-      ["Band pull-apart","3×15-20","Postural · 45″"]
-    ]}
-  },
-  acc:{
-    adapt:{ph:"Accesorios (S1-2)",ex:[
-      ["Curl martillo","3×12","Braquial + antebrazo · 60″"],
-      ["Tríceps en polea","3×12","Definición de brazo · 60″"],
-      ["Elevaciones laterales","2×15","Más volumen de hombro lateral · 60″"],
-      ["Plancha frontal","3×30″","Core · 45″"],
-      ["Colgarse de barra","2×20-30″","Descompresión + agarre"],
-      ["Rutina postural","5-10'","Chin tucks · wall slides · band pull-aparts"]
-    ]},
-    hyper:{ph:"Accesorios (S3-8)",ex:[
-      ["Curl martillo","3×12","Braquial + antebrazo · 60″"],
-      ["Tríceps en polea","3×12","Definición de brazo · 60″"],
-      ["Elevaciones laterales","3×15","Más volumen de hombro lateral — da el visual de ancho · 60″"],
-      ["Cruces en polea baja","2×12-15","Pecho superior · complementa martes · 60″"],
-      ["Plancha frontal","3×45″","Core · 45″"],
-      ["Colgarse de barra","2×30″","Descompresión + agarre"],
-      ["Rutina postural","5-10'","Chin tucks · wall slides · band pull-aparts"]
+      ["Jalón agarre neutro / dominadas asistidas","3×8-10","Variante distinta al martes · 2'"],
+      ["Press banca con mancuernas","3×8-10","Estímulo distinto a la barra del lunes · 2'"],
+      ["Remo mancuerna un brazo","3×10-12/lado","Espalda plana · sin girar el tronco · 90″"],
+      ["Elevaciones laterales","3×12-15","2ª dosis semanal de hombro lateral · 60″"],
+      ["Band pull-apart","3×15-20","Postural · 45″"],
+      ["Curl + tríceps superset","3×10-12","Brazos 2ª frecuencia · 60″ tras la ronda"]
     ]}
   }
 };
 
 function gstr(title,week){
   let key=null;
-  if(/Tren inferior|pierna/i.test(title))key="inferior";
-  else if(/Superior A/i.test(title))key="supA";
-  else if(/Superior B/i.test(title))key="supB";
-  else if(/Accesorios/i.test(title))key="acc";
+  if(/Empuje/i.test(title))key="empuje";
+  else if(/Tir[oó]n/i.test(title))key="tiron";
+  else if(/Pierna/i.test(title))key="pierna";
+  else if(/Torso/i.test(title))key="torso";
   if(!key)return null;
   const p=week<=2?"adapt":"hyper";
-  return{...STR[key][p],tp:title.replace(/ · .*/,""),light:/ligera|muy ligera|descarga|reducid/i.test(title)};
+  return{...STR[key][p],tp:title.replace(/ · .*/,"").replace(/ \+ fotos/,""),light:/ligera|muy ligera|descarga|reducid/i.test(title)};
 }
 
 // ── REGISTRO DE PESOS (localStorage) ──
@@ -346,85 +343,85 @@ function renderMob(zones,color){
 
 // ── SEMANAS ──
 // [type, title, detail, km]
-// Lun=Inferior · Mar=Superior A · Mié=Cardio · Jue=Superior B · Vie=Accesorios · Sáb=Deporte · Dom=Descanso
+// Lun=Empuje · Mar=Tirón · Mié=Cardio · Jue=Pierna+core · Vie=Torso · Sáb=Deporte · Dom=Descanso
 const WK=[
-// S1 · 6-12 jul · Adaptación
+// S1 · Adaptación
 [
-["strength","Tren inferior · técnica","Goblet squat · RDL mancuernas · hip thrust solo barra · zancada estática · plancha · gemelos · aprender los patrones, sin prisa por cargar",0],
-["strength","Superior A · técnica","Press banca mancuernas · jalón · press militar sentado · remo apoyado · face pulls · pesos moderados, técnica perfecta",0],
+["strength","Empuje · técnica","Press banca mancuernas · press militar sentado · press inclinado · laterales · tríceps polea · pesos moderados, técnica perfecta",0],
+["strength","Tirón · técnica","Jalón · remo máquina apoyado · remo mancuerna · face pulls · curl · escápulas abajo y atrás antes de tirar",0],
 ["easy","Cardio suave","25-30' trote suave o bici estática · FC <135 · conversación fluida · sin reloj ni ritmo",4],
-["strength","Superior B · técnica","Remo mancuerna · press inclinado · pull-apart · laterales · curl + tríceps superset · aprender cada movimiento",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · plancha · colgarse barra · rutina postural 5-10'",0],
+["strength","Pierna + core · técnica","Goblet squat · RDL mancuernas · hip thrust solo barra · zancada estática · gemelos · plancha · aprender los patrones, sin prisa por cargar",0],
+["strength","Torso · técnica","Remo mancuerna · press banca mancuernas · jalón neutro · pull-apart · laterales · curl + tríceps · segunda pasada a los patrones de la semana",0],
 ["sport","Deporte libre o cardio","Pádel, fútbol, carrera suave 30-40' o descanso si hace falta · lo que surja",4],
 ["rest","Descanso","",0]
 ],
-// S2 · 13-19 jul · Adaptación
+// S2 · Adaptación
 [
-["strength","Tren inferior · técnica","Goblet squat · RDL mancuernas · hip thrust · zancada · ext. espalda · gemelos · si la S1 fue limpia, sube 2-3 kg en goblet y RDL",0],
-["strength","Superior A · técnica","Press banca mancuernas · jalón · press militar · remo apoyado · face pulls · sube ligeramente si la técnica aguanta",0],
+["strength","Empuje · técnica","Press banca mancuernas · press militar · press inclinado · laterales · tríceps · sube 2-3 kg si la S1 fue limpia",0],
+["strength","Tirón · técnica","Jalón · remo máquina · remo mancuerna · face pulls · curl · añade 4-5 dominadas negativas (bajada de 4-5″) al final",0],
 ["easy","Cardio: rodaje + rectas","30' · 25' trote suave + 4×80m progresivos al final (rápido pero sin sprint) · reactivan la zancada",5],
-["strength","Superior B · técnica","Remo mancuerna · press inclinado · dominadas negativas (4-5 neg. de 4-5″) · laterales · curl + tríceps · pull-apart",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · plancha · colgarse barra · rutina postural",0],
+["strength","Pierna + core · técnica","Goblet squat · RDL mancuernas · hip thrust · zancada · gemelos · plancha · sube 2-3 kg en goblet y RDL si la técnica aguanta",0],
+["strength","Torso · técnica","Remo mancuerna · press banca mancuernas · jalón neutro · pull-apart · laterales · curl + tríceps",0],
 ["sport","Deporte libre","Pádel, fútbol, carrera 30-40' o descanso",5],
 ["rest","Descanso","",0]
 ],
-// S3 · 20-26 jul · Hipertrofia I · empieza barra
+// S3 · Hipertrofia I · empieza barra
 [
-["strength","Tren inferior","Sentadilla trasera con barra · RDL barra · hip thrust barra · bulgarian split squat · ext. espalda · gemelos · primer día con barra en compuestos: apunta pesos",0],
-["strength","Superior A","Press banca barra · jalón · press militar de pie · remo apoyado · cruces polea · face pulls · RPE 7-8 en press y jalón",0],
+["strength","Empuje","Press banca con barra · press militar de pie · press inclinado · laterales · tríceps · primer día con barra: apunta pesos y deja 3 en el tanque",0],
+["strength","Tirón","Jalón/negativas · remo barra Pendlay · remo máquina · face pulls · curl · el Pendlay es el ejercicio clave para tu espalda: técnica impecable",0],
 ["easy","Cardio libre","30-35' · rodaje suave, bici o elíptica · FC <140 · día de soltar piernas",5],
-["strength","Superior B","Remo barra Pendlay · press inclinado · dominadas/negativas · laterales · curl + tríceps superset · pull-apart",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · cruces baja · plancha 45″ · colgarse · postural",0],
+["strength","Pierna + core","Sentadilla trasera con barra · RDL barra · hip thrust barra · ext. espalda · gemelos · plancha · primer día con barra en pierna: carga humilde",0],
+["strength","Torso","Jalón neutro · press banca mancuernas · remo mancuerna · laterales · pull-apart · curl + tríceps · segunda frecuencia de todo el torso",0],
 ["sport","Deporte libre","Lo que surja: pádel, fútbol, carrera suave",5],
 ["rest","Descanso","",0]
 ],
-// S4 · 27 jul-2 ago · Hipertrofia I
+// S4 · Hipertrofia I
 [
-["strength","Tren inferior","Sentadilla · RDL · hip thrust · bulgarian · ext. espalda · gemelos · +2,5 kg en sentadilla y RDL si la S3 fue limpia",0],
-["strength","Superior A","Press banca · jalón · press militar · remo apoyado · cruces · face pulls · +2,5 kg en press banca si completaste el rango",0],
+["strength","Empuje","Press banca · militar · inclinado · laterales · tríceps · +2,5 kg en banca si completaste el rango 2 sesiones seguidas",0],
+["strength","Tirón","Jalón · Pendlay · remo máquina · face pulls · curl · +2,5 kg en Pendlay si la espalda se mantiene plana",0],
 ["intervals","Cardio: intervalos","30' · 5' calentamiento trote + 6×(30″ rápido / 90″ trote suave) + 5' vuelta a la calma · entrena la capacidad de repetir sprints para fútbol/pádel",5],
-["strength","Superior B","Remo barra · press inclinado · dominadas · laterales · curl + tríceps · pull-apart",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · cruces baja · plancha · colgarse · postural",0],
+["strength","Pierna + core","Sentadilla · RDL · hip thrust · ext. espalda · gemelos · plancha · +2,5 kg en sentadilla y RDL si la S3 fue limpia",0],
+["strength","Torso","Jalón neutro · press mancuernas · remo mancuerna · laterales · pull-apart · curl + tríceps",0],
 ["sport","Deporte libre","Pádel, fútbol, carrera o descanso",5],
 ["rest","Descanso","",0]
 ],
-// S5 · 3-9 ago · DESCARGA
+// S5 · DESCARGA
 [
-["strength","Tren inferior · ligera","Reduce a 2-3 series por ejercicio · mismos pesos · semana de descarga: el músculo crece mientras descansas, no mientras levantas",0],
-["strength","Superior A · ligera","Reduce volumen · mismos pesos · no subas carga esta semana",0],
+["strength","Empuje · ligera","Reduce a 2-3 series por ejercicio · mismos pesos · el músculo crece mientras descansas, no mientras levantas",0],
+["strength","Tirón · ligera","Reduce volumen · mismos pesos · no subas carga esta semana",0],
 ["easy","Cardio suave","25-30' trote o bici muy suave · día de recuperación real",4],
-["strength","Superior B · ligera","Reduce volumen · mismos pesos",0],
-["mobility","Movilidad + postural","Sesión completa 30' · cadera, tobillos, torácica + rutina postural · el viernes más importante del plan",0],
+["strength","Pierna + core · ligera","Reduce a 2 series por ejercicio · mismos pesos",0],
+["mobility","Movilidad + postural","Sesión completa 30' · cadera, tobillos, torácica + rutina postural · sustituye al torso esta semana: el viernes más importante del plan",0],
 ["sport","Deporte libre o descanso","Actividad suave si apetece · si el cuerpo pide descanso, descansa",4],
 ["rest","Descanso","",0]
 ],
-// S6 · 10-16 ago · Hipertrofia II
+// S6 · Hipertrofia II
 [
-["strength","Tren inferior","Sentadilla · RDL · hip thrust · bulgarian · ext. espalda · gemelos · tras la descarga deberías sentirte fresco: sube pesos",0],
-["strength","Superior A","Press banca · jalón · press militar · remo apoyado · cruces · face pulls",0],
+["strength","Empuje","Press banca · militar · inclinado · laterales · tríceps · tras la descarga deberías sentirte fresco: sube pesos",0],
+["strength","Tirón","Jalón/dominadas · Pendlay · remo máquina · face pulls · curl · objetivo: 3-5 dominadas completas",0],
 ["intervals","Cardio: intervalos","30' · 5' calentamiento + 8×(30″ rápido / 90″ trote suave) + 5' vuelta a la calma · 2 rondas más que la S4",5],
-["strength","Superior B","Remo barra · press inclinado · dominadas · laterales · curl + tríceps · pull-apart · objetivo: 3-5 dominadas completas",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · cruces baja · plancha · colgarse · postural",0],
+["strength","Pierna + core","Sentadilla · RDL · hip thrust · ext. espalda · gemelos · plancha",0],
+["strength","Torso","Jalón neutro · press mancuernas · remo mancuerna · laterales · pull-apart · curl + tríceps",0],
 ["sport","Deporte libre","Pádel, fútbol, carrera o lo que surja",5],
 ["rest","Descanso","",0]
 ],
-// S7 · 17-23 ago · Hipertrofia II
+// S7 · Hipertrofia II
 [
-["strength","Tren inferior","Sentadilla · RDL · hip thrust · bulgarian · ext. espalda · gemelos · deberías estar cerca de tus máximos del bloque",0],
-["strength","Superior A","Press banca · jalón · press militar · remo apoyado · cruces · face pulls",0],
+["strength","Empuje","Press banca · militar · inclinado · laterales · tríceps · deberías estar cerca de tus máximos del bloque",0],
+["strength","Tirón","Jalón/dominadas · Pendlay · remo máquina · face pulls · curl",0],
 ["easy","Cardio libre","30-35' · rodaje suave, bici o elíptica · suelta piernas para el deporte del sábado",5],
-["strength","Superior B","Remo barra · press inclinado · dominadas · laterales · curl + tríceps · pull-apart",0],
-["strength","Accesorios + core","Curl martillo · tríceps polea · laterales · cruces baja · plancha · colgarse · postural",0],
+["strength","Pierna + core","Sentadilla · RDL · hip thrust · ext. espalda · gemelos · plancha",0],
+["strength","Torso","Jalón neutro · press mancuernas · remo mancuerna · laterales · pull-apart · curl + tríceps",0],
 ["sport","Deporte libre","Pádel, fútbol, carrera o descanso",5],
 ["rest","Descanso","",0]
 ],
-// S8 · 24-30 ago · Consolidación
+// S8 · Consolidación
 [
-["strength","Tren inferior","Sentadilla · RDL · hip thrust · bulgarian · ext. espalda · gemelos · cierre de bloque: apunta tus pesos finales y compáralos con la S1",0],
-["strength","Superior A","Press banca · jalón · press militar · remo apoyado · cruces · face pulls · última semana: disfruta lo que levantas vs hace 8 semanas",0],
+["strength","Empuje","Press banca · militar · inclinado · laterales · tríceps · cierre de bloque: compara tus pesos registrados con la S3",0],
+["strength","Tirón","Jalón/dominadas · Pendlay · remo máquina · face pulls · curl · última semana: disfruta lo que levantas vs hace 8 semanas",0],
 ["easy","Cardio libre","30' suave · rodaje o bici · sin presión",5],
-["strength","Superior B","Remo barra · press inclinado · dominadas · laterales · curl + tríceps · pull-apart",0],
-["strength","Accesorios + core + fotos","Sesión normal + hazte fotos comparativas con las de la S1 · mismo sitio, misma luz",0],
+["strength","Pierna + core","Sentadilla · RDL · hip thrust · ext. espalda · gemelos · plancha",0],
+["strength","Torso + fotos","Sesión normal + hazte fotos comparativas con las de la S1 · mismo sitio, misma luz",0],
 ["sport","Deporte libre","Cierra el verano con lo que más te apetezca",5],
 ["rest","Descanso","",0]
 ]
@@ -549,10 +546,10 @@ function renderInfo(){
   <input type="file" id="impfile" accept=".json,application/json" hidden></div>`;
 
   h+=`<div class="section-title">Distribución semanal · todas ≤ 1h</div>`;
-  h+=`<div class="zcard">${[["Lunes","🏋️ Tren inferior — sentadilla, RDL, hip thrust, unilateral","var(--purple)"],["Martes","🏋️ Superior A — empuje (press banca, militar) + ancho (jalón, remo)","var(--purple)"],["Miércoles","🏃 Cardio libre — rodaje, bici, elíptica o intervalos","var(--green)"],["Jueves","🏋️ Superior B — tirón (remo barra, dominadas) + hombro lateral","var(--purple)"],["Viernes","🏋️ Accesorios — brazos, laterales, core, postural","var(--purple)"],["Sábado","⚽ Deporte o cardio — pádel, fútbol, carrera, o descanso","var(--yellow)"],["Domingo","😴 Descanso","#555"]].map(([n,d,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${d}</div></div></div>`).join("")}</div>`;
+  h+=`<div class="zcard">${[["Lunes","🏋️ Empuje — press banca, militar, inclinado, laterales, tríceps","var(--purple)"],["Martes","🏋️ Tirón — jalón, Pendlay, remo, face pulls, curl","var(--purple)"],["Miércoles","🏃 Cardio libre — rodaje, bici, elíptica o intervalos","var(--green)"],["Jueves","🏋️ Pierna + core — sentadilla, RDL, hip thrust, ext. espalda","var(--purple)"],["Viernes","🏋️ Torso — 2ª frecuencia · sesgo tirón · mancuernas y máquinas","var(--purple)"],["Sábado","⚽ Deporte o cardio — pádel, fútbol, carrera, o descanso","var(--yellow)"],["Domingo","😴 Descanso","#555"]].map(([n,d,c])=>`<div class="zr"><div><div class="zn" style="color:${c}">${n}</div><div class="zu">${d}</div></div></div>`).join("")}</div>`;
 
   h+=`<div class="section-title">Por qué esta distribución</div>`;
-  h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:#d0d0e0">Tren inferior 1 vez:</strong> parece poco, pero tus piernas ya reciben estímulo del cardio del miércoles y el deporte del sábado. Un segundo día pesado competiría y te dejaría con las piernas cargadas para el fin de semana.<br><br><strong style="color:#d0d0e0">Superior 2 veces:</strong> donde más margen de mejora estética tienes. Espalda ancha, pecho, hombros laterales y brazos. Dos sesiones permiten separar empuje/tirón con volumen suficiente (~16-18 series/semana por grupo).<br><br><strong style="color:#d0d0e0">Accesorios viernes:</strong> sesión de bajo coste sistémico. Brazos, hombro lateral y core no generan fatiga que interfiera con el sábado, y son los grupos con más impacto visual por serie invertida.<br><br><strong style="color:#d0d0e0">Sábado deporte:</strong> la sesión comodín. Pádel, fútbol, carrera, bici — lo que surja. Eso es lo que mantiene la base aeróbica sin estructura rígida.</div></div>`;
+  h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:#d0d0e0">Empuje y tirón separados (lun/mar):</strong> permiten concentrar volumen donde más margen estético tienes — espalda ~20 series/semana, hombro lateral en 2 frecuencias — sin que ninguna sesión pase de 1h.<br><br><strong style="color:#d0d0e0">Pierna 1 vez (jue):</strong> parece poco, pero el cardio del miércoles y el deporte del sábado ya suman estímulo. Un día pesado bien hecho progresa siendo principiante, y con 48h de margen llegas al sábado sin las piernas cargadas.<br><br><strong style="color:#d0d0e0">Torso viernes:</strong> segunda frecuencia semanal de espalda, pecho, hombro y brazos con mancuernas y máquinas: coste sistémico bajo que no interfiere con el sábado. Mantiene el ratio 2:1 tirón/empuje que corrige la postura.<br><br><strong style="color:#d0d0e0">Sábado deporte:</strong> la sesión comodín. Pádel, fútbol, carrera, bici — lo que surja. Eso es lo que mantiene la base aeróbica sin estructura rígida.</div></div>`;
 
   h+=`<div class="section-title">Progresión de pesos</div>`;
   h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6"><strong style="color:var(--yellow)">Reglas:</strong><br>• Deja siempre 3-4 reps en el tanque. NUNCA al fallo.<br>• Si la técnica se rompe, para la serie. No importa el peso.<br>• Sube carga solo cuando completes el rango superior de reps con buena técnica 2 sesiones seguidas — el registro de cada sesión te lo dice sin memoria.<br>• Compuestos: +2,5 kg/semana las primeras 4-5 semanas. Luego más lento.<br>• Peso muerto convencional con barra: NO antes de la semana 5-6 y solo si ya controlas el RDL.</div></div>`;
@@ -592,7 +589,7 @@ function renderInfo(){
   h+=`<div class="zcard" style="border-left:3px solid var(--red)"><div style="font-size:11px;color:var(--red);font-weight:700;margin-bottom:4px">Lo que NO hacer</div><div style="font-size:12px;color:#aaa;line-height:1.6">• Ayuno intermitente agresivo<br>• Dietas bajas en carbos<br>• Saltarte comidas<br>• Pesarte a diario obsesivamente — 2 veces por semana, en ayunas, promedia<br>• Entrenar en ayunas los días de intervalos o fuerza pesada</div></div>`;
 
   h+=`<div class="section-title">Gestión de fatiga</div>`;
-  h+=`<div class="zcard"><div style="font-size:12px;color:var(--text);line-height:1.6"><strong style="color:var(--yellow)">Señales acumuladas (no aisladas):</strong> FC reposo +5-7 ppm varios días · rodaje suave que cuesta 2 días seguidos · sueño malo sin causa · pérdida de ganas >3 días · dolor articular nuevo.<br><br><strong style="color:var(--orange)">1 señal:</strong> mantén plan, quita la última serie de cada ejercicio.<br><strong style="color:var(--red)">2-3 señales:</strong> cambia la sesión del día por rodaje suave 30' o descanso.<br><strong style="color:var(--red)">3+ persistentes:</strong> descanso total 1-2 días.<br><br><strong style="color:var(--green)">Orden al recortar:</strong> 1.º Cardio del miércoles → 2.º Accesorios viernes → 3.º Deporte sábado → 4.º Superior B → 5.º Superior A → 6.º Tren inferior (el último en caer).<br><br><strong style="color:var(--teal)">Hombro derecho:</strong> si molesta en press, baja peso y rango. Prioriza tracción esa semana. Molestia >2 semanas = fisio.</div></div>`;
+  h+=`<div class="zcard"><div style="font-size:12px;color:var(--text);line-height:1.6"><strong style="color:var(--yellow)">Señales acumuladas (no aisladas):</strong> FC reposo +5-7 ppm varios días · rodaje suave que cuesta 2 días seguidos · sueño malo sin causa · pérdida de ganas >3 días · dolor articular nuevo.<br><br><strong style="color:var(--orange)">1 señal:</strong> mantén plan, quita la última serie de cada ejercicio.<br><strong style="color:var(--red)">2-3 señales:</strong> cambia la sesión del día por rodaje suave 30' o descanso.<br><strong style="color:var(--red)">3+ persistentes:</strong> descanso total 1-2 días.<br><br><strong style="color:var(--green)">Orden al recortar:</strong> 1.º Cardio del miércoles → 2.º Deporte sábado → 3.º Torso viernes → 4.º Empuje lunes → 5.º Pierna jueves → 6.º Tirón martes (el último en caer: sostiene espalda y postura).<br><br><strong style="color:var(--teal)">Hombro derecho:</strong> si molesta en press, baja peso y rango. Prioriza tracción esa semana. Molestia >2 semanas = fisio.</div></div>`;
 
   h+=`<div class="section-title">Fotos y medidas</div>`;
   h+=`<div class="zcard"><div style="font-size:12px;color:#aaa;line-height:1.6">Antes de la S1: foto de frente, perfil y espalda. Mismo sitio, misma luz. Mide cintura, brazo (flexionado), pecho, muslo. Pésate 3 días seguidos en ayunas y promedia.<br><br>Repite las fotos y medidas en la S5 (descarga) y en la S8 (cierre). Es la única forma objetiva de ver el cambio — el espejo miente porque te ves todos los días.</div></div>`;
